@@ -5,7 +5,6 @@ export function EmailList({ emails }) {
                 <table>
                     <tr>
                       <th>icons</th>
-                      <th>icons</th>
                       <th>subject</th>
                       <th>body</th>
                       <th>time</th>
