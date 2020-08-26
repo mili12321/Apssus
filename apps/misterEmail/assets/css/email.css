@@ -1,48 +1,19 @@
-body {
-    background-color: lightblue;
-}
 
-body {
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-}
-/* header{
-    height: 50px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    padding: 10px;
-    background-color: rgb(209, 209, 209);
-} */
-.logo-Appsus{
-    font-size: 25px;
-    align-self: center;
-}
-nav{
-    align-self: center;
-}
-.container{
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-}
 /* --------------------------------------- */
 .email-app-container{
     align-self: center;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    max-width: 1400px;
-    width: 80vw;
+    justify-content:center;
+    max-width: 1800px;
+    width: 90vw;
     margin: 20px;
 }
 .email-options-container{
-    background-color: rgb(255, 255, 255);
-    max-width: 500px;
-    width: 20vw;
+    background-color: rgb(163, 30, 30);
+    max-width: 300px;
+    /* min-width: 200px; */
+    width: 25vw;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -51,9 +22,18 @@ nav{
 .email-list-container{
     background-color: rgb(235, 235, 235);
     padding: 30px;
+    width: 75vw;
 }
 td {
     padding: 10px;
+    width: 20vw;
+    text-align: center;
+}
+.email-body{
+    max-width: 20vw;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 .new-mail{
     padding: 5px;

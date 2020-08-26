@@ -8,7 +8,9 @@ export function EmailPreview({ email }) {
                     { email.body }
                     Lorem, ipsum dolor sit amet consectetur adipisicing.
                 </td>
-                <td>time</td>
+                <td> 
+                  { email.sentAt }
+                </td>
 {/* <table>
   <tr>
     <th>Company</th>
