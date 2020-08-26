@@ -2,22 +2,23 @@ export const emailService = {
     query,
     getById,
     saveToStorage,
-    loadFromStorage
+    loadFromStorage,
+    remove
 }
 const KEY = 'emails'
 
 var emails = [
-    { id: 'm101', subject: 'Wassap?', body: 'Pick up!', isRead: false, sentAt : 1551133930594},
-    { id: 'm102', subject: 'Wassap?', body: 'Pick up!', isRead: false, sentAt : 1551133930594},
-    { id: 'm103', subject: 'Wassap?', body: 'Pick up!', isRead: false, sentAt : 1551133930594},
-    { id: 'm104', subject: 'Wassap?', body: 'Pick up!', isRead: false, sentAt : 1551133930594},
-    { id: 'm105', subject: 'Wassap?', body: 'Pick up!', isRead: false, sentAt : 1551133930594},
-    { id: 'm106', subject: 'Wassap?', body: 'Pick up!', isRead: false, sentAt : 1551133930594},
-    { id: 'm107', subject: 'Wassap?', body: 'Pick up!', isRead: false, sentAt : 1551133930594},
-    { id: 'm108', subject: 'Wassap?', body: 'Pick up!', isRead: false, sentAt : 1551133930594},
-    { id: 'm109', subject: 'Wassap?', body: 'Pick up!', isRead: false, sentAt : 1551133930594},
-    { id: 'm1010', subject: 'Wassap?', body: 'Pick up!', isRead: false, sentAt : 1551133930594},
-    { id: 'm1011', subject: 'Wassap?', body: 'Pick up!', isRead: false, sentAt : 1551133930594}
+    { id: 'm101', sender: 'mili', subject: 'Wassap?', body: 'Pick up!', isRead: false, sentAt : 1551133930594},
+    { id: 'm102', sender: 'mili', subject: 'Wassap?', body: 'Pick up!', isRead: false, sentAt : 1551133930594},
+    { id: 'm103', sender: 'mili', subject: 'Wassap?', body: 'Pick up!', isRead: false, sentAt : 1551133930594},
+    { id: 'm104', sender: 'mili', subject: 'Wassap?', body: 'Pick up!', isRead: false, sentAt : 1551133930594},
+    { id: 'm105', sender: 'mili', subject: 'Wassap?', body: 'Pick up!', isRead: false, sentAt : 1551133930594},
+    { id: 'm106', sender: 'mili', subject: 'Wassap?', body: 'Pick up!', isRead: false, sentAt : 1551133930594},
+    { id: 'm107', sender: 'mili', subject: 'Wassap?', body: 'Pick up!', isRead: false, sentAt : 1551133930594},
+    { id: 'm108', sender: 'mili', subject: 'Wassap?', body: 'Pick up!', isRead: false, sentAt : 1551133930594},
+    { id: 'm109', sender: 'mili', subject: 'Wassap?', body: 'Pick up!', isRead: false, sentAt : 1551133930594},
+    { id: 'm1010', sender: 'mili', subject: 'Wassap?', body: 'Pick up!', isRead: false, sentAt : 1551133930594},
+    { id: 'm1011', sender: 'mili', subject: 'Wassap?', body: 'Pick up!', isRead: false, sentAt : 1551133930594}
    
 ]
 let gEmails;
@@ -35,6 +36,15 @@ function getById(emailId) {
     const email = mails.find(email => email.id === emailId)
     return Promise.resolve(email)
 }
+
+function remove(idx){
+    gEmails.splice(idx, 1);
+    saveToStorage(KEY, gEmails)
+    console.log(gEmails)
+}
+
+
+
 
 function makeId(length = 5) {
     var txt = '';
