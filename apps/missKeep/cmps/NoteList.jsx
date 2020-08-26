@@ -11,6 +11,10 @@ export class NoteList extends React.Component {
                             this.props.delete(note.id)
                         }}>
                                   x</button>
+                                  <button onClick={() => {
+                            this.props.pin(note.id)
+                        }}>
+                                  pin</button>
                     </li>
                 )
     }

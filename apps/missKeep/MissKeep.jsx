@@ -1,5 +1,6 @@
 import { ComposeNote } from './cmps/ComposeNote.jsx'
 import { NoteList } from './cmps/NoteList.jsx'
+import { NoteTypeSelect } from './cmps/NoteTypeSelect.jsx'
 import { keepService } from './services/keep-service.js'
 
 export class MissKeep extends React.Component {
@@ -13,21 +14,26 @@ export class MissKeep extends React.Component {
     }
 
     updateNotes = () => {
-        var notes = keepService.getNotes()
-        this.setState({ notes })
+        keepService.getNotes()
+        .then((notes) => this.setState({ notes }))
 
     }
 
     writeNote = (txt) => {
         this.setState({ txt })
+
     }
-    saveNoteToService = () => {
+    saveNewNote = () => {
         keepService.addNote(this.state.txt)
-        this.updateNotes()
+        .then(() => this.updateNotes())
     }
     
     DeleteNote = (noteId) => {
         keepService.deleteNote(noteId)
+        this.updateNotes()
+    }
+    PinNote = (noteId) => {
+        keepService.PinNote(noteId)
         this.updateNotes()
     }
 
@@ -35,10 +41,11 @@ export class MissKeep extends React.Component {
         return (<div>
             <section>
                 <ComposeNote onWriteNote={this.writeNote} />
-                <button onClick={this.saveNoteToService}>save!</button>
+                <button onClick={this.saveNewNote}>save!</button>
+                <NoteTypeSelect />
             </section>
             <div>
-                <NoteList delete={this.DeleteNote} Notes={this.state.notes} />
+                <NoteList delete={this.DeleteNote} pin={this.PinNote} Notes={this.state.notes} />
             </div>
         </div>
         )

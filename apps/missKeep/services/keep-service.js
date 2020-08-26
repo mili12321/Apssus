@@ -1,8 +1,40 @@
 export const keepService = {
     addNote,
     getNotes,
-    deleteNote
+    deleteNote,
+    PinNote
 }
+
+//storage
+const NOTE_KEY = 'notes'
+
+
+function saveToStorage(key, val) {
+    var str = JSON.stringify(val);
+    localStorage.setItem(key, str)
+}
+
+
+function loadFromStorage(key) {
+    var str = localStorage.getItem(key);
+    var val = JSON.parse(str)
+    return val;
+}
+
+//pinNote
+
+function PinNote(noteId) {
+
+    const notes = loadFromStorage(NOTE_KEY)
+    const idx = notes.findIndex(note => note.id === noteId)
+    const next = notes[idx]
+    notes.splice(idx, 1)
+    notes.unshift(next)
+    saveToStorage(NOTE_KEY, notes)
+}
+
+
+
 
 
 
@@ -14,31 +46,40 @@ var gNotes = [{
 
 
 function noteById(noteId) {
-  const note = gNotes.find(note => note.id === noteId)
-  
-  
+
 }
 
 
 
 
 function deleteNote(noteId) {
-const idx = gNotes.findIndex(note => note.id === noteId)
-console.log(idx)
-gNotes.splice(idx, 1)
+    const notes = loadFromStorage(NOTE_KEY)
+    const idx = notes.findIndex(note => note.id === noteId)
+    console.log(idx)
+    notes.splice(idx, 1)
+    saveToStorage(NOTE_KEY, notes)
 }
 
 
 function addNote(txt) {
+    const notes = loadFromStorage(NOTE_KEY)
     let note = {
         txt: txt,
         id: makeId()
     }
-    gNotes.unshift(note)
+    notes.unshift(note)
+    saveToStorage(NOTE_KEY, notes)
+    return Promise.resolve()
 }
 
 function getNotes() {
-    return gNotes
+    let notes = loadFromStorage(NOTE_KEY)
+    if (!notes) {
+        saveToStorage(NOTE_KEY, gNotes)
+        notes = loadFromStorage(NOTE_KEY)
+    }
+
+    return Promise.resolve(notes);
 }
 
 
