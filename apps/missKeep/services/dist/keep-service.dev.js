@@ -8,7 +8,9 @@ var keepService = {
   addNote: addNote,
   getNotes: getNotes,
   deleteNote: deleteNote,
-  PinNote: PinNote
+  PinNote: PinNote,
+  newNoteYoutube: newNoteYoutube,
+  newNoteImage: newNoteImage
 }; //storage
 
 exports.keepService = keepService;
@@ -59,6 +61,33 @@ function addNote(txt) {
   var note = {
     txt: txt,
     id: makeId()
+  };
+  notes.unshift(note);
+  saveToStorage(NOTE_KEY, notes);
+  return Promise.resolve();
+} // diff kindes of notes
+
+
+function newNoteYoutube(url) {
+  var notes = loadFromStorage(NOTE_KEY);
+  console.log(url);
+  var embededUrl = url.replace('watch?v=', 'embed/');
+  var note = {
+    txt: null,
+    id: makeId(),
+    youtube: "".concat(embededUrl)
+  };
+  notes.unshift(note);
+  saveToStorage(NOTE_KEY, notes);
+  return Promise.resolve();
+}
+
+function newNoteImage(url) {
+  var notes = loadFromStorage(NOTE_KEY);
+  var note = {
+    txt: null,
+    id: makeId(),
+    img: url
   };
   notes.unshift(note);
   saveToStorage(NOTE_KEY, notes);

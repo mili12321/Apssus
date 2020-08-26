@@ -7,17 +7,24 @@ export class NoteList extends React.Component {
                 notes.map(note =>
                     <li className="note" key={note.id}>
                         {note.txt}
-                        <button onClick={() => {
-                            this.props.delete(note.id)
-                        }}>
-                                  x</button>
-                                  <button onClick={() => {
-                            this.props.pin(note.id)
-                        }}>
-                                  pin</button>
+                        {note.youtube && <iframe width="400" height="315"
+                            src={note.youtube}>
+                        </iframe>}
+                        {note.img && <img width="400" height="315"
+                            src={note.img}></img>}
+
+
+                            <button onClick={() => {
+                                this.props.delete(note.id)
+                            }}>
+                                x</button>
+                            <button onClick={() => {
+                                this.props.pin(note.id)
+                            }}>
+                                pin</button>
                     </li>
                 )
-    }
+            }
         </ul>
 
     }
