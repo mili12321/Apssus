@@ -46,7 +46,7 @@ export class MissKeep extends React.Component {
     }
 
     render() {
-        return (<div>
+        return (<div className="main-Container center"> 
             <section>
                 <ComposeNote onWriteNote={this.writeNote} />
                 <button onClick={this.saveNewNote}>save!</button>

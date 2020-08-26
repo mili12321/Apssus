@@ -2,12 +2,12 @@ export class NoteList extends React.Component {
 
     render() {
         const notes = this.props.Notes
-        return <ul>
+        return <ul className="note-list">
             {
                 notes.map(note =>
                     <li className="note" key={note.id}>
                         {note.txt}
-                        {note.youtube && <iframe width="400" height="315"
+                        {note.youtube && <iframe width="300" height="220"
                             src={note.youtube}>
                         </iframe>}
                         {note.img && <img width="400" height="315"

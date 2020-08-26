@@ -36,6 +36,7 @@ function PinNote(noteId) {
   var next = notes[idx];
   notes.splice(idx, 1);
   notes.unshift(next);
+  notes[0].pinned = true;
   saveToStorage(NOTE_KEY, notes);
 }
 
