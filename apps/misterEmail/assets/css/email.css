@@ -1,3 +1,66 @@
 body {
     background-color: lightblue;
 }
+
+body {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+/* header{
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: rgb(209, 209, 209);
+} */
+.logo-Appsus{
+    font-size: 25px;
+    align-self: center;
+}
+nav{
+    align-self: center;
+}
+.container{
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+/* --------------------------------------- */
+.email-app-container{
+    align-self: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    max-width: 1400px;
+    width: 80vw;
+    margin: 20px;
+}
+.email-options-container{
+    background-color: rgb(255, 255, 255);
+    max-width: 500px;
+    width: 20vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 30px;
+}
+.email-list-container{
+    background-color: rgb(235, 235, 235);
+    padding: 30px;
+}
+td {
+    padding: 10px;
+}
+.new-mail{
+    padding: 5px;
+    margin: 10px;
+    align-self: center;
+}
+.email-option{
+    align-self: center;  
+    margin: 10px;
+}
