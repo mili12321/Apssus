@@ -1,2 +1,13 @@
 @import "../../apps/misterEmail/assets/css/email.css"; 
 @import "navbar.css"; 
+body {
+    padding: 0;
+    margin: 0;
+}
+
+.main-Contaoner{
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
