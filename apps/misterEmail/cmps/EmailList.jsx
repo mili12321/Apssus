@@ -1,20 +1,25 @@
 import { EmailPreview } from 'EmailPreview.jsx'
+
 export function EmailList({ emails }) {
     return (
             <div className="email-list-container">
                 <table>
-                    <tr>
-                      <th>icons</th>
-                      <th>subject</th>
-                      <th>body</th>
-                      <th>time</th>
-                    </tr>
-                    
-                        { emails.map(email =>
-                                <EmailPreview email={ email } />
+                    <thead>
+                        <tr>
+                          <th>icons</th>
+                          <th>sender</th>
+                          <th>subject</th>
+                          <th>body</th>
+                          <th>time</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    { emails.map((email,idx) =>
+                                <EmailPreview email={ email } idx={idx} key={ email.id }/>
                             )
                         }
                    
+                   </tbody>
                 </table>
             </div>
     )

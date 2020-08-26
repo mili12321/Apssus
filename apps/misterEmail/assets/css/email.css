@@ -10,7 +10,7 @@
     margin: 20px;
 }
 .email-options-container{
-    background-color: rgb(163, 30, 30);
+    background-color: rgb(252, 86, 169);
     max-width: 300px;
     /* min-width: 200px; */
     width: 25vw;
@@ -20,7 +20,7 @@
     padding: 30px;
 }
 .email-list-container{
-    background-color: rgb(235, 235, 235);
+    background-color: rgb(255, 195, 240);
     padding: 30px;
     width: 75vw;
 }
@@ -30,11 +30,49 @@ td {
     text-align: center;
 }
 .email-body{
-    max-width: 20vw;
+    max-width: 30vw;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
+.bold{
+    font-weight:bold;
+}
+.email-options{
+    display: none;
+}
+tr:hover .email-options{
+    display: block;
+}
+tr:hover .time{
+    display: none;
+}
+.fas{
+    margin:0 5px;
+}
+/* .email-icons{
+   
+}
+.email-subject{
+
+}
+.email-time{
+
+} */
+.email-time{
+    position: relative;
+}
+/* .email-time::before{
+    position: absolute;
+    color: rgb(124, 14, 14);
+    content: '';
+    top: 0;
+    left:-80px;
+    width: 200px;
+    height: 100%;
+    background-color: rgb(255, 195, 240);
+
+} */
 .new-mail{
     padding: 5px;
     margin: 10px;
