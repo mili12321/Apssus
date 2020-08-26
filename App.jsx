@@ -14,8 +14,8 @@ export class App extends React.Component {
         return (
                 <Router>
                 <div>
-                    <header>
-                        <NavBar />
+                    <header className="header">
+                        <NavBar/>
                     </header>
                     <nav>
                         <main className="main-Contaoner">

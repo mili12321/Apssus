@@ -1,0 +1,18 @@
+.header{
+    background-color: rgb(194, 194, 194);
+    padding: 20px;
+}
+.header-continer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 90vw;
+    margin: 0 auto;
+}
+.logo-appsus{
+    font-size: 25px;
+    align-self: center;
+}
+.navbar-container{
+    align-self: center;
+}
