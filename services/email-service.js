@@ -1,12 +1,10 @@
 export const emailService = {
     query,
-    // save,
-    // getEmpty,
-    // remove,
     getById,
-    // getNextPrev
-
+    saveToStorage,
+    loadFromStorage
 }
+const KEY = 'emails'
 
 var emails = [
     { id: 'm101', subject: 'Wassap?', body: 'Pick up!', isRead: false, sentAt : 1551133930594},
@@ -22,52 +20,22 @@ var emails = [
     { id: 'm1011', subject: 'Wassap?', body: 'Pick up!', isRead: false, sentAt : 1551133930594}
    
 ]
-// window.thePets = pets;
-
-// const API_URL='myapiadress'
-
-// function getEmpty() {
-//     return { name: '', power: 0 };
-// }
+let gEmails;
 
 function query() {
-    return Promise.resolve(emails)
+    gEmails = loadFromStorage(KEY)
+    if(!gEmails){
+        gEmails = emails 
+        saveToStorage(KEY, gEmails)
+    }
+    return Promise.resolve(gEmails)
 }
-// function save(petToSave) {
-//     petToSave.id ? _update(petToSave) : _add(petToSave)
-// }
-// function _add(pet) {
-//     const petToAdd = {
-//         ...pet,
-//         id: makeId()
-//     }
-//     pets = [petToAdd, ...pets]
-//     window.thePets = pets
-// }
-// function _update(petToSave) {
-//     // const petIdx = pets.findIndex(pet => pet.id === petToSave.id)
-//     // pets.splice(petIdx, 1, petToSave)
-//     pets = pets.map(pet => pet.id === petToSave.id ? petToSave : pet)
-//     return petToSave
-// }
-// function remove(petId) {
-//     pets = pets.filter(pet => pet.id !== petId)
-// }
+
 function getById(emailId) {
     const email = mails.find(email => email.id === emailId)
     return Promise.resolve(email)
 }
-// function getNextPrev(petId) {
-//     const petIdx = pets.findIndex(pet => pet.id === petId)
-//     // const nextPetId = pets[petIdx + 1]?  pets[petIdx + 1]: pets[0]
-//     // The SAME!!
-//     const nextPet = pets[petIdx + 1] || pets[0]
-//     const prevPet = pets[petIdx - 1] || pets[pets.length - 1]
-//     return {
-//         prevPetId: prevPet.id,
-//         nextPetId: nextPet.id
-//     }
-// }
+
 function makeId(length = 5) {
     var txt = '';
     var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -75,4 +43,12 @@ function makeId(length = 5) {
         txt += possible.charAt(Math.floor(Math.random() * possible.length));
     }
     return txt;
+}
+function saveToStorage(key, val) {
+    localStorage.setItem(key, JSON.stringify(val))
+  }
+  
+  function loadFromStorage(key) {
+    var val = localStorage.getItem(key)
+    return JSON.parse(val)
 }
