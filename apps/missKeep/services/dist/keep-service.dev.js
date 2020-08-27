@@ -10,7 +10,9 @@ var keepService = {
   deleteNote: deleteNote,
   PinNote: PinNote,
   newNoteYoutube: newNoteYoutube,
-  newNoteImage: newNoteImage
+  newNoteImage: newNoteImage,
+  newNoteAudio: newNoteAudio,
+  newListNote: newListNote
 }; //storage
 
 exports.keepService = keepService;
@@ -36,7 +38,13 @@ function PinNote(noteId) {
   var next = notes[idx];
   notes.splice(idx, 1);
   notes.unshift(next);
-  notes[0].pinned = true;
+
+  if (notes[0].pinned = true) {
+    notes[0].pinned = false;
+  } else {
+    notes[0].pinned = true;
+  }
+
   saveToStorage(NOTE_KEY, notes);
 }
 
@@ -46,6 +54,18 @@ var gNotes = [{
 }];
 
 function noteById(noteId) {}
+
+function newNoteAudio(url) {
+  var notes = loadFromStorage(NOTE_KEY);
+  var note = {
+    txt: null,
+    id: makeId(),
+    audio: url
+  };
+  notes.unshift(note);
+  saveToStorage(NOTE_KEY, notes);
+  return Promise.resolve();
+}
 
 function deleteNote(noteId) {
   var notes = loadFromStorage(NOTE_KEY);
@@ -74,7 +94,6 @@ function newNoteYoutube(url) {
   console.log(url);
   var embededUrl = url.replace('watch?v=', 'embed/');
   var note = {
-    txt: null,
     id: makeId(),
     youtube: "".concat(embededUrl)
   };
@@ -83,10 +102,21 @@ function newNoteYoutube(url) {
   return Promise.resolve();
 }
 
+function newListNote(li, noteId) {
+  console.log(li, noteId);
+  var notes = loadFromStorage(NOTE_KEY);
+  var idx = notes.findIndex(function (note) {
+    return note.id === noteId;
+  });
+  if (!notes[idx].list) notes[idx].list = [];
+  notes[idx].list.push(li);
+  saveToStorage(NOTE_KEY, notes);
+  return Promise.resolve();
+}
+
 function newNoteImage(url) {
   var notes = loadFromStorage(NOTE_KEY);
   var note = {
-    txt: null,
     id: makeId(),
     img: url
   };

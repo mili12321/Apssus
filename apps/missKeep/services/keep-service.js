@@ -4,7 +4,9 @@ export const keepService = {
     deleteNote,
     PinNote,
     newNoteYoutube,
-    newNoteImage
+    newNoteImage,
+    newNoteAudio,
+    newListNote
 }
 
 //storage
@@ -32,7 +34,11 @@ function PinNote(noteId) {
     const next = notes[idx]
     notes.splice(idx, 1)
     notes.unshift(next)
-    notes[0].pinned = true;
+    if (notes[0].pinned = true) {
+        notes[0].pinned = false
+    } else {
+        notes[0].pinned = true;
+    }
     saveToStorage(NOTE_KEY, notes)
 }
 
@@ -53,7 +59,17 @@ function noteById(noteId) {
 }
 
 
-
+function newNoteAudio(url) {
+    const notes = loadFromStorage(NOTE_KEY)
+    let note = {
+        txt: null,
+        id: makeId(),
+        audio: url,
+    }
+    notes.unshift(note)
+    saveToStorage(NOTE_KEY, notes)
+    return Promise.resolve()
+}
 
 function deleteNote(noteId) {
     const notes = loadFromStorage(NOTE_KEY)
@@ -79,9 +95,8 @@ function addNote(txt) {
 function newNoteYoutube(url) {
     const notes = loadFromStorage(NOTE_KEY)
     console.log(url)
-    var embededUrl = url.replace('watch?v=', 'embed/')  
+    var embededUrl = url.replace('watch?v=', 'embed/')
     let note = {
-        txt: null,
         id: makeId(),
         youtube: `${embededUrl}`,
     }
@@ -89,10 +104,19 @@ function newNoteYoutube(url) {
     saveToStorage(NOTE_KEY, notes)
     return Promise.resolve()
 }
+function newListNote(li, noteId) {
+    console.log(li, noteId);
+    const notes = loadFromStorage(NOTE_KEY)
+    const idx = notes.findIndex(note => note.id === noteId)
+    if(!notes[idx].list) notes[idx].list = []
+    notes[idx].list.push(li)
+    saveToStorage(NOTE_KEY, notes)
+    return Promise.resolve()
+}
+
 function newNoteImage(url) {
     const notes = loadFromStorage(NOTE_KEY)
     let note = {
-        txt: null,
         id: makeId(),
         img: url
     }

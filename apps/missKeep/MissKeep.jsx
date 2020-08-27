@@ -44,16 +44,24 @@ export class MissKeep extends React.Component {
         keepService.newNoteImage(url)
         this.updateNotes()
     }
+    newNoteAudio = (url) => {
+        keepService.newNoteAudio(url)
+        this.updateNotes()
+    }
+    inlineInput(li, id) {
+        keepService.newListNote(li, id)
+        this.updateNotes()
+    }
 
     render() {
         return (<div className="main-Container center"> 
             <section>
                 <ComposeNote onWriteNote={this.writeNote} />
                 <button onClick={this.saveNewNote}>save!</button>
-                <NoteTypeSelect onNewNoteImage={this.newNoteImage} onNewNoteYoutube={this.newNoteYoutube}/>
+                <NoteTypeSelect onNewNoteImage={this.newNoteImage} onNewNoteYoutube={this.newNoteYoutube} onNewNoteAudio={this.newNoteAudio}/>
             </section>
             <div>
-                <NoteList delete={this.DeleteNote} pin={this.PinNote} Notes={this.state.notes} />
+                <NoteList delete={this.DeleteNote} pin={this.PinNote} Notes={this.state.notes} onInlineInput={this.inlineInput}/>
             </div>
         </div>
         )
