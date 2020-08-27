@@ -2,7 +2,9 @@ export const keepService = {
     addNote,
     getNotes,
     deleteNote,
-    PinNote
+    PinNote,
+    newNoteYoutube,
+    newNoteImage
 }
 
 //storage
@@ -71,6 +73,33 @@ function addNote(txt) {
     saveToStorage(NOTE_KEY, notes)
     return Promise.resolve()
 }
+// diff kindes of notes
+
+function newNoteYoutube(url) {
+    const notes = loadFromStorage(NOTE_KEY)
+    console.log(url)
+    var embededUrl = url.replace('watch?v=', 'embed/')  
+    let note = {
+        txt: null,
+        id: makeId(),
+        youtube: `${embededUrl}`,
+    }
+    notes.unshift(note)
+    saveToStorage(NOTE_KEY, notes)
+    return Promise.resolve()
+}
+function newNoteImage(url) {
+    const notes = loadFromStorage(NOTE_KEY)
+    let note = {
+        txt: null,
+        id: makeId(),
+        img: url
+    }
+    notes.unshift(note)
+    saveToStorage(NOTE_KEY, notes)
+    return Promise.resolve()
+}
+
 
 function getNotes() {
     let notes = loadFromStorage(NOTE_KEY)

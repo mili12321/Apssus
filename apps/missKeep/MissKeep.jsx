@@ -36,13 +36,21 @@ export class MissKeep extends React.Component {
         keepService.PinNote(noteId)
         this.updateNotes()
     }
+    newNoteYoutube = (url) =>{
+        keepService.newNoteYoutube(url)
+        this.updateNotes()
+    }
+    newNoteImage = (url) => {
+        keepService.newNoteImage(url)
+        this.updateNotes()
+    }
 
     render() {
         return (<div>
             <section>
                 <ComposeNote onWriteNote={this.writeNote} />
                 <button onClick={this.saveNewNote}>save!</button>
-                <NoteTypeSelect />
+                <NoteTypeSelect onNewNoteImage={this.newNoteImage} onNewNoteYoutube={this.newNoteYoutube}/>
             </section>
             <div>
                 <NoteList delete={this.DeleteNote} pin={this.PinNote} Notes={this.state.notes} />
