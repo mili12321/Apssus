@@ -32,8 +32,8 @@ export class NoteList extends React.Component {
                     <div className="note" key={note.id}>
                         {note.txt && <div>
                             <h1>{note.txt}</h1>
-                            {note.list && note.list.map(text =>
-                                <li>text</li>
+                            {note.list && note.list.map(li =>
+                                <li>li</li>
                             )
                             }
                             <button className="fa-pencil-alt" onClick={this.setEdit}></button>
@@ -42,7 +42,7 @@ export class NoteList extends React.Component {
                         {note.youtube && <iframe width="300" height="220"
                             src={note.youtube}>
                         </iframe>}
-                        {note.img && <img width="400" height="315"
+                        {note.img && <img width="300" height="220"
                             src={note.img}></img>}
                         {note.audio && <audio controls>
                             <source src="horse.ogg" type="audio/ogg" />
