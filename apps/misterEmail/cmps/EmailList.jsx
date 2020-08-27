@@ -18,7 +18,6 @@ export function EmailList({ emails }) {
                                 <EmailPreview email={ email } idx={idx} key={ email.id }/>
                             )
                         }
-                   
                    </tbody>
                 </table>
             </div>
