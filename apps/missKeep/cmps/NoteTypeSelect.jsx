@@ -14,7 +14,6 @@ export class NoteTypeSelect extends React.Component {
         this.setState({ curr: 'audio' })
     }
     NoteSelect = (props) => {
-        console.log(props)
         switch (props) {
             case 'youtube': return <input type="text" placeholder="youtubeURL here:" onKeyUp={(ev)=>{
                 console.log(ev)

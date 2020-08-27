@@ -6,7 +6,8 @@ export const keepService = {
     newNoteYoutube,
     newNoteImage,
     newNoteAudio,
-    newListNote
+    newListNote,
+    searchNotes
 }
 
 //storage
@@ -23,6 +24,19 @@ function loadFromStorage(key) {
     var str = localStorage.getItem(key);
     var val = JSON.parse(str)
     return val;
+}
+
+//search
+function searchNotes(text) {
+    console.log(text);
+    const notes = loadFromStorage(NOTE_KEY)
+    let newNotes=[]
+    notes.forEach((note)=> {
+    if(note.text === text && !newNotes.includes(note))
+    newNotes.push(note)
+    })
+    console.log(newNotes)
+    return newNotes
 }
 
 //pinNote

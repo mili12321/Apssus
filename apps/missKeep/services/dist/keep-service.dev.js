@@ -12,7 +12,8 @@ var keepService = {
   newNoteYoutube: newNoteYoutube,
   newNoteImage: newNoteImage,
   newNoteAudio: newNoteAudio,
-  newListNote: newListNote
+  newListNote: newListNote,
+  searchNotes: searchNotes
 }; //storage
 
 exports.keepService = keepService;
@@ -27,6 +28,18 @@ function loadFromStorage(key) {
   var str = localStorage.getItem(key);
   var val = JSON.parse(str);
   return val;
+} //search
+
+
+function searchNotes(text) {
+  console.log(text);
+  var notes = loadFromStorage(NOTE_KEY);
+  var newNotes = [];
+  notes.forEach(function (note) {
+    if (note.text === text && !newNotes.includes(note)) newNotes.push(note);
+  });
+  console.log(newNotes);
+  return newNotes;
 } //pinNote
 
 

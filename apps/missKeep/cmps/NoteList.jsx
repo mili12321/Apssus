@@ -32,8 +32,8 @@ export class NoteList extends React.Component {
                     <div className="note" key={note.id}>
                         {note.txt && <div>
                             <h1>{note.txt}</h1>
-                            {note.list && note.list.map(li =>
-                                <li>li</li>
+                            {note.list && note.list.map(todo =>
+                                <li>{todo}</li>
                             )
                             }
                             <button className="fa-pencil-alt" onClick={this.setEdit}></button>
