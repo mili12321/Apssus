@@ -1,5 +1,6 @@
 import { emailService } from '../../services/email-service.js'
 import { EmailList } from 'cmps/EmailList.jsx';
+import { EmailCompose } from 'EmailCompose.jsx';
 
 
 
@@ -36,7 +37,7 @@ export class EmailApp extends React.Component {
             <div className="email-app-container">
                 
                 <div className="email-options-container">
-                    <input name='sender' value={this.state.emailToAdd.sender} 
+                    {/* <input name='sender' value={this.state.emailToAdd.sender} 
                         placeholder='sender name'
                         type="text" onChange={this.onInputChange}
                     />
@@ -48,14 +49,35 @@ export class EmailApp extends React.Component {
                         placeholder='body' 
                         type="text" onChange={this.onInputChange}
                     />
-                    <div className="email-option new-mail" onClick={this.addEmail}>+ Compose</div>
+                    <button onClick={this.addEmail}>add</button> */}
+
+                    <div className="email-option new-mail">+ Compose</div>
                     <div className="email-option inbox">Inbox</div>
                     <div className="email-option starred">Starred</div>
                     <div className="email-option sent-mail">Sent mail</div>
                     <div className="email-option drafs">Drafs</div>
                 </div>
                 <EmailList emails={ this.state.emails }/>
+
+
+                <EmailCompose>
+                        <input name='sender' value={this.state.emailToAdd.sender} 
+                            placeholder='sender name'
+                            type="text" onChange={this.onInputChange}
+                        />
+                        <input name='subject' value={this.state.emailToAdd.subject}
+                            placeholder='subject' 
+                            type="text" onChange={this.onInputChange}
+                        />
+                        <input name="body" value={this.state.emailToAdd.body}
+                            placeholder='body' 
+                            type="text" onChange={this.onInputChange}
+                        />
+                        <button onClick={this.addEmail}>add</button>
+                </EmailCompose>
             </div>
+
+
         )
     }
 }
