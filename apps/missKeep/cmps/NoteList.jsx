@@ -5,21 +5,32 @@ export class NoteList extends React.Component {
         id: 0
     }
     setEdit = () => {
+        var pencil = document.querySelector(`.pencil`)
+        pencil.style.display = 'none'
+        var todo = document.querySelector(`.todo`)
+       
         this.setState({ edit: 'active' })
     }
     setId = (ID) => {
         this.setState({ ID })
     }
     lineLi = (id) => {
-        console.log(id);
+        let li = document.querySelector(`.${id}`)
+        li.classList.toggle('lineT')
     }
     NoteInlineInput = (props) => {
+
+
         console.log(props)
         switch (this.state.edit) {
-            case 'active': return <input type="text" placeholder="todo:" onKeyUp={(ev) => {
+            case 'active': return <input className="todo" type="text" placeholder="todo:" onKeyUp={(ev) => {
                 console.log(ev)
                 if (ev.keyCode === 13) {
                     this.props.onInlineInput(ev.target.value, props)
+                    var pencil = document.querySelector(`.pencil`)
+                    pencil.style.display = 'none'
+                    var pencil = document.querySelector(`.todo`)
+                    pencil.style.display = 'block'
                 }
             }} />
             default: return <div></div>
@@ -31,6 +42,7 @@ export class NoteList extends React.Component {
     render() {
         const notes = this.props.Notes
         var noteId;
+        console.log(notes)
         return <div className="note-list">
             {
                 notes.map(note =>
@@ -38,11 +50,13 @@ export class NoteList extends React.Component {
                         {note.txt && <div>
                             <h1>{note.txt}</h1>
                             {note.list && note.list.map(todo =>
-                                <li id={keepService.makeId()} >{todo}</li>
-                            )
+                               <div> <li className={todo.id} onClick={() => {
+                                    { this.lineLi(todo.id) }
+                                }}>{todo.txt}<span className="fas fa-trash trash"></span></li></div>
+                               )
                             }
-                            <button>trash</button>
-                            <button className="fa-pencil-alt" onClick={this.setEdit}></button>
+                            
+                            <button className="fas fa-pencil-alt pencil" onClick={this.setEdit}></button>
                             {this.NoteInlineInput(note.id)}
                         </div>}
                         {note.youtube && <iframe width="300" height="220"

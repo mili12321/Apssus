@@ -63,9 +63,31 @@ function PinNote(noteId) {
 
 
 var gNotes = [{
+    txt: 'this is a list',
+    id: makeId(),
+    list: [{txt: 'hello its me', id: makeId()}, {txt: 'hello its me', id: makeId()}, {txt: 'hello its me', id: makeId()}]
+},
+
+{
+    id: makeId(),
+    youtube: `https://www.youtube.com/embed/tgbNymZ7vqY`,
+},
+{
+    id: makeId(),
+    img: 'https://compote.slate.com/images/18ba92e4-e39b-44a3-af3b-88f735703fa7.png?width=780&height=520&rect=1560x1040&offset=0x0'
+},
+{
     txt: 'hello react',
     id: makeId()
-}]
+}
+// {
+//     txt: null,
+//     id: makeId(),
+//     audio: '',
+// },
+
+
+]
 
 
 
@@ -124,7 +146,8 @@ function newListNote(li, noteId) {
     const notes = loadFromStorage(NOTE_KEY)
     const idx = notes.findIndex(note => note.id === noteId)
     if (!notes[idx].list) notes[idx].list = []
-    notes[idx].list.push(li)
+    notes[idx].list.push({txt:li, id:makeId()})
+    console.log(notes[idx]);
     saveToStorage(NOTE_KEY, notes)
     return Promise.resolve()
 }
@@ -161,7 +184,7 @@ function getNotes(text) {
         }
         if(note.list) {
             note.list.map((li) => {
-                 if (li.includes(text) && !newNotes.includes(note))
+                 if (li.txt.includes(text) && !newNotes.includes(note))
                 newNotes.push(note)
             } ) }
     })
