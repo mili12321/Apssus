@@ -1,19 +1,16 @@
 
 export class EmailCompose extends React.Component {
-    state = {
-        isShown: true
-    }
-    closeModal = () => {
-        this.setState({ isShown: false })
-    }
     render() {
-        const { isShown } = this.state
-        const { children } = this.props
+        const { children, isModalShown,onToggleModal } = this.props
         return (
-            <div className={ `modal-wrapper ${isShown ? '' : 'hide'}` } onClick={ this.closeModal } >
+            <div className={ `modal-wrapper ${isModalShown ? '' : 'hide'}` } onClick={onToggleModal } >
                 <div className="modal-content" onClick={ (ev) => ev.stopPropagation() }>
-                    <button onClick={ this.closeModal }>X</button>
+                    <div className="modal-header">
+                        <div className="modal-title">New Massage</div>
+                        <button onClick={ onToggleModal }>X</button>
+                    </div>
                     { children }
+                    <i class="fas fa-trash"></i>
                 </div>
             </div >
         )

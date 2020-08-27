@@ -40,10 +40,7 @@ export class EmailPreview extends React.Component {
   toggleOpenMail = () =>{
 
   }
-  onRemoveEmail = (idx) =>{
-    console.log('email is removed',idx)
-    emailService.remove(idx)
-  }
+  
   render() {
   
       return (
@@ -64,7 +61,7 @@ export class EmailPreview extends React.Component {
                 <div className="round-div-on-hover-fa-envelope"></div>
                 <i className={`fas fa-envelope${this.state.isReadIcon} center`} onClick={this.togglereadMail}></i>
                 <div className="round-div-on-hover-fa-trash"></div>
-                <i className="fas fa-trash center" onClick={ () => this.onRemoveEmail(this.props.idx) }></i>
+                <i className="fas fa-trash center" onClick={ () => this.props.onRemoveEmail(this.props.idx) }></i>
             
 
             </div>
@@ -81,9 +78,7 @@ export class EmailPreview extends React.Component {
                     </div>
                     <div className="round-div">
                       <Link to={`/EmailApp/${this.props.email.id}`}>
-                        <i className="fas fa-expand" onClick={()=>{
-                          <EmailDetails email={this.props.email}/>
-                        }}></i>
+                        <i className="fas fa-expand"></i>
                       </Link>
                     </div>
                    
@@ -92,6 +87,7 @@ export class EmailPreview extends React.Component {
               <div className="sliding-email-sender"><span className="sender-name">{this.props.email.sender}</span> {`<${this.props.email.sender}@gmail.com>`}</div>
               <div className="sliding-email-body">{ this.props.email.body }
               Lorem, ipsum dolor sit amet consectetur adipisicing.</div>
+            
           </td>
         </tr>
       </React.Fragment>
