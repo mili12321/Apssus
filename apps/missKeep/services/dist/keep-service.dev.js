@@ -138,15 +138,36 @@ function newNoteImage(url) {
   return Promise.resolve();
 }
 
-function getNotes() {
-  var notes = loadFromStorage(NOTE_KEY);
+function getNotes(text) {
+  if (!text) {
+    var notes = loadFromStorage(NOTE_KEY);
 
-  if (!notes) {
-    saveToStorage(NOTE_KEY, gNotes);
-    notes = loadFromStorage(NOTE_KEY);
+    if (!notes) {
+      saveToStorage(NOTE_KEY, gNotes);
+      notes = loadFromStorage(NOTE_KEY);
+    }
+
+    return Promise.resolve(notes);
+  } else {
+    var _notes = loadFromStorage(NOTE_KEY);
+
+    var newNotes = [];
+
+    _notes.forEach(function (note) {
+      if (note.txt) {
+        if (note.txt.includes(text) && !newNotes.includes(note)) newNotes.push(note);
+      }
+
+      if (note.list) {
+        note.list.map(function () {
+          if (note.txt.includes(text) && !newNotes.includes(note)) newNotes.push(note);
+        });
+      }
+    });
+
+    console.log(newNotes);
+    return Promise.resolve(newNotes);
   }
-
-  return Promise.resolve(notes);
 }
 
 function makeId() {

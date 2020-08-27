@@ -53,8 +53,9 @@ export class MissKeep extends React.Component {
         this.updateNotes()
     }
     onSearchNotes = (search) =>{
-        keepService.searchNotes(search)
-        this.updateNotes()
+        keepService.getNotes(search)
+        .then((notes) => this.setState({ notes }))
+
     }
 
     render() {

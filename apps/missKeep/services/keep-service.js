@@ -30,10 +30,10 @@ function loadFromStorage(key) {
 function searchNotes(text) {
     console.log(text);
     const notes = loadFromStorage(NOTE_KEY)
-    let newNotes=[]
-    notes.forEach((note)=> {
-    if(note.text === text && !newNotes.includes(note))
-    newNotes.push(note)
+    let newNotes = []
+    notes.forEach((note) => {
+        if (note.text === text && !newNotes.includes(note))
+            newNotes.push(note)
     })
     console.log(newNotes)
     return newNotes
@@ -118,11 +118,12 @@ function newNoteYoutube(url) {
     saveToStorage(NOTE_KEY, notes)
     return Promise.resolve()
 }
+
 function newListNote(li, noteId) {
     console.log(li, noteId);
     const notes = loadFromStorage(NOTE_KEY)
     const idx = notes.findIndex(note => note.id === noteId)
-    if(!notes[idx].list) notes[idx].list = []
+    if (!notes[idx].list) notes[idx].list = []
     notes[idx].list.push(li)
     saveToStorage(NOTE_KEY, notes)
     return Promise.resolve()
@@ -140,15 +141,36 @@ function newNoteImage(url) {
 }
 
 
-function getNotes() {
-    let notes = loadFromStorage(NOTE_KEY)
-    if (!notes) {
-        saveToStorage(NOTE_KEY, gNotes)
-        notes = loadFromStorage(NOTE_KEY)
-    }
+function getNotes(text) {
+    if (!text) {
+        let notes = loadFromStorage(NOTE_KEY)
+        if (!notes) {
+            saveToStorage(NOTE_KEY, gNotes)
+            notes = loadFromStorage(NOTE_KEY)
+        }
 
-    return Promise.resolve(notes);
+        return Promise.resolve(notes);
+    }
+   else {
+    const notes = loadFromStorage(NOTE_KEY)
+    let newNotes = []
+    notes.forEach((note) => {
+        if(note.txt) {
+        if (note.txt.includes(text) && !newNotes.includes(note))
+            newNotes.push(note)
+        }
+        if(note.list) {
+            note.list.map(() => {
+                 if (note.txt.includes(text) && !newNotes.includes(note))
+                newNotes.push(note)
+            } ) }
+    })
+     
+    console.log(newNotes)
+    return Promise.resolve(newNotes);
 }
+}
+
 
 
 
