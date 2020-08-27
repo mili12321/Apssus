@@ -57,22 +57,7 @@ input{
     border: none;
     width: 90%;
 }
-/* .fa-trash{
-    position:relative;
-    z-index: 2;
-}
-.round-div-on-hover-fa-envelope, .round-div-on-hover-fa-trash{
-    background-color: transparent;
-    width: 30px;
-    height: 30px;
-    margin: 5px;
-    border-radius: 50%;
 
-}
-.round-div-on-hover-fa-trash:hover{
-    background-color: rgb(218, 218, 218);
-    position: absolute;
-} */
 .center{
     align-self: center;
 }
@@ -206,5 +191,8 @@ table{
     margin: 5px;
 }
 .round-div i{
+    align-self: center; 
+}
+.round-div a{
     align-self: center; 
 }

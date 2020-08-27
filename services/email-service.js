@@ -5,7 +5,8 @@ export const emailService = {
     loadFromStorage,
     remove,
     add,
-    getEmpty
+    getEmpty,
+    CountUnreadMails
 }
 const KEY = 'emails'
 
@@ -25,7 +26,7 @@ var emails = [
 ]
 let gEmails;
 window.theEmails = emails
-
+let count = emails.length
 function query() {
     gEmails = loadFromStorage(KEY)
     if(!gEmails){
@@ -36,14 +37,23 @@ function query() {
 }
 
 function getById(emailId) {
-    const email = mails.find(email => email.id === emailId)
+    const email = gEmails.find(email => email.id === emailId)
     return Promise.resolve(email)
+}
+function checkIfRead(idx){
+    emails[idx].isRead = true
+    //todo: load to storage? how ro render the change
+}
+function CountUnreadMails(){
+    console.log(count)
+    return count
 }
 
 function remove(idx){
     gEmails.splice(idx, 1);
     saveToStorage(KEY, gEmails)
     console.log(gEmails)
+    count--
 }
 
 function add(email){
@@ -57,6 +67,7 @@ function add(email){
     saveToStorage(KEY, gEmails)
     console.log(gEmails)
     window.theEmails = gEmails
+    count++
 }
 function getEmpty(){
     return {sender: '',subject:'', body:''}
