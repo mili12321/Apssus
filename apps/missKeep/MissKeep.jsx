@@ -15,7 +15,7 @@ export class MissKeep extends React.Component {
 
     updateNotes = () => {
         keepService.getNotes()
-        .then((notes) => this.setState({ notes }))
+            .then((notes) => this.setState({ notes }))
 
     }
 
@@ -25,9 +25,9 @@ export class MissKeep extends React.Component {
     }
     saveNewNote = () => {
         keepService.addNote(this.state.txt)
-        .then(() => this.updateNotes())
+            .then(() => this.updateNotes())
     }
-    
+
     DeleteNote = (noteId) => {
         keepService.deleteNote(noteId)
         this.updateNotes()
@@ -36,7 +36,7 @@ export class MissKeep extends React.Component {
         keepService.PinNote(noteId)
         this.updateNotes()
     }
-    newNoteYoutube = (url) =>{
+    newNoteYoutube = (url) => {
         keepService.newNoteYoutube(url)
         this.updateNotes()
     }
@@ -44,16 +44,34 @@ export class MissKeep extends React.Component {
         keepService.newNoteImage(url)
         this.updateNotes()
     }
+    newNoteAudio = (url) => {
+        keepService.newNoteAudio(url)
+        this.updateNotes()
+    }
+    inlineInput = (li, id) => {
+        keepService.newListNote(li, id)
+        this.updateNotes()
+    }
+    onSearchNotes = (search) =>{
+        keepService.getNotes(search)
+        .then((notes) => this.setState({ notes }))
+
+    }
 
     render() {
-        return (<div>
+        return (<div className="main-Container center">
             <section>
+                search notes:<input type="search" onChange={(ev) => {
+                        this.onSearchNotes(ev.target.value)
+                        // ev.target.value = ''
+                    }
+                } />
                 <ComposeNote onWriteNote={this.writeNote} />
                 <button onClick={this.saveNewNote}>save!</button>
-                <NoteTypeSelect onNewNoteImage={this.newNoteImage} onNewNoteYoutube={this.newNoteYoutube}/>
+                <NoteTypeSelect onNewNoteImage={this.newNoteImage} onNewNoteYoutube={this.newNoteYoutube} onNewNoteAudio={this.newNoteAudio} />
             </section>
             <div>
-                <NoteList delete={this.DeleteNote} pin={this.PinNote} Notes={this.state.notes} />
+                <NoteList delete={this.DeleteNote} pin={this.PinNote} Notes={this.state.notes} onInlineInput={this.inlineInput} />
             </div>
         </div>
         )

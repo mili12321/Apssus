@@ -4,7 +4,11 @@ export const keepService = {
     deleteNote,
     PinNote,
     newNoteYoutube,
-    newNoteImage
+    newNoteImage,
+    newNoteAudio,
+    newListNote,
+    searchNotes,
+    makeId
 }
 
 //storage
@@ -23,6 +27,19 @@ function loadFromStorage(key) {
     return val;
 }
 
+//search
+function searchNotes(text) {
+    console.log(text);
+    const notes = loadFromStorage(NOTE_KEY)
+    let newNotes = []
+    notes.forEach((note) => {
+        if (note.text === text && !newNotes.includes(note))
+            newNotes.push(note)
+    })
+    console.log(newNotes)
+    return newNotes
+}
+
 //pinNote
 
 function PinNote(noteId) {
@@ -32,6 +49,11 @@ function PinNote(noteId) {
     const next = notes[idx]
     notes.splice(idx, 1)
     notes.unshift(next)
+    if (notes[0].pinned = true) {
+        notes[0].pinned = false
+    } else {
+        notes[0].pinned = true;
+    }
     saveToStorage(NOTE_KEY, notes)
 }
 
@@ -52,7 +74,17 @@ function noteById(noteId) {
 }
 
 
-
+function newNoteAudio(url) {
+    const notes = loadFromStorage(NOTE_KEY)
+    let note = {
+        txt: null,
+        id: makeId(),
+        audio: url,
+    }
+    notes.unshift(note)
+    saveToStorage(NOTE_KEY, notes)
+    return Promise.resolve()
+}
 
 function deleteNote(noteId) {
     const notes = loadFromStorage(NOTE_KEY)
@@ -78,9 +110,8 @@ function addNote(txt) {
 function newNoteYoutube(url) {
     const notes = loadFromStorage(NOTE_KEY)
     console.log(url)
-    var embededUrl = url.replace('watch?v=', 'embed/')  
+    var embededUrl = url.replace('watch?v=', 'embed/')
     let note = {
-        txt: null,
         id: makeId(),
         youtube: `${embededUrl}`,
     }
@@ -88,10 +119,19 @@ function newNoteYoutube(url) {
     saveToStorage(NOTE_KEY, notes)
     return Promise.resolve()
 }
+
+function newListNote(li, noteId) {
+    const notes = loadFromStorage(NOTE_KEY)
+    const idx = notes.findIndex(note => note.id === noteId)
+    if (!notes[idx].list) notes[idx].list = []
+    notes[idx].list.push(li)
+    saveToStorage(NOTE_KEY, notes)
+    return Promise.resolve()
+}
+
 function newNoteImage(url) {
     const notes = loadFromStorage(NOTE_KEY)
     let note = {
-        txt: null,
         id: makeId(),
         img: url
     }
@@ -101,15 +141,36 @@ function newNoteImage(url) {
 }
 
 
-function getNotes() {
-    let notes = loadFromStorage(NOTE_KEY)
-    if (!notes) {
-        saveToStorage(NOTE_KEY, gNotes)
-        notes = loadFromStorage(NOTE_KEY)
-    }
+function getNotes(text) {
+    if (!text) {
+        let notes = loadFromStorage(NOTE_KEY)
+        if (!notes) {
+            saveToStorage(NOTE_KEY, gNotes)
+            notes = loadFromStorage(NOTE_KEY)
+        }
 
-    return Promise.resolve(notes);
+        return Promise.resolve(notes);
+    }
+   else {
+    const notes = loadFromStorage(NOTE_KEY)
+    let newNotes = []
+    notes.forEach((note) => {
+        if(note.txt) {
+        if (note.txt.includes(text) && !newNotes.includes(note))
+            newNotes.push(note)
+        }
+        if(note.list) {
+            note.list.map((li) => {
+                 if (li.includes(text) && !newNotes.includes(note))
+                newNotes.push(note)
+            } ) }
+    })
+     
+    console.log(newNotes)
+    return Promise.resolve(newNotes);
 }
+}
+
 
 
 
