@@ -1,12 +1,17 @@
+import { keepService } from '../services/keep-service.js'
 export class NoteList extends React.Component {
     state = {
-        edit: null
+        edit: null,
+        id: 0
     }
     setEdit = () => {
         this.setState({ edit: 'active' })
     }
     setId = (ID) => {
         this.setState({ ID })
+    }
+    lineLi = (id) => {
+        console.log(id);
     }
     NoteInlineInput = (props) => {
         console.log(props)
@@ -33,9 +38,10 @@ export class NoteList extends React.Component {
                         {note.txt && <div>
                             <h1>{note.txt}</h1>
                             {note.list && note.list.map(todo =>
-                                <li>{todo}</li>
+                                <li id={keepService.makeId()} >{todo}</li>
                             )
                             }
+                            <button>trash</button>
                             <button className="fa-pencil-alt" onClick={this.setEdit}></button>
                             {this.NoteInlineInput(note.id)}
                         </div>}

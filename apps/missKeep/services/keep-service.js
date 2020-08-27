@@ -7,7 +7,8 @@ export const keepService = {
     newNoteImage,
     newNoteAudio,
     newListNote,
-    searchNotes
+    searchNotes,
+    makeId
 }
 
 //storage
@@ -120,7 +121,6 @@ function newNoteYoutube(url) {
 }
 
 function newListNote(li, noteId) {
-    console.log(li, noteId);
     const notes = loadFromStorage(NOTE_KEY)
     const idx = notes.findIndex(note => note.id === noteId)
     if (!notes[idx].list) notes[idx].list = []
@@ -160,8 +160,8 @@ function getNotes(text) {
             newNotes.push(note)
         }
         if(note.list) {
-            note.list.map(() => {
-                 if (note.txt.includes(text) && !newNotes.includes(note))
+            note.list.map((li) => {
+                 if (li.includes(text) && !newNotes.includes(note))
                 newNotes.push(note)
             } ) }
     })

@@ -13,7 +13,8 @@ var keepService = {
   newNoteImage: newNoteImage,
   newNoteAudio: newNoteAudio,
   newListNote: newListNote,
-  searchNotes: searchNotes
+  searchNotes: searchNotes,
+  makeId: makeId
 }; //storage
 
 exports.keepService = keepService;
@@ -116,7 +117,6 @@ function newNoteYoutube(url) {
 }
 
 function newListNote(li, noteId) {
-  console.log(li, noteId);
   var notes = loadFromStorage(NOTE_KEY);
   var idx = notes.findIndex(function (note) {
     return note.id === noteId;
@@ -159,8 +159,8 @@ function getNotes(text) {
       }
 
       if (note.list) {
-        note.list.map(function () {
-          if (note.txt.includes(text) && !newNotes.includes(note)) newNotes.push(note);
+        note.list.map(function (li) {
+          if (li.includes(text) && !newNotes.includes(note)) newNotes.push(note);
         });
       }
     });
