@@ -156,11 +156,13 @@ table{
     display: none; 
 }
 .showMail{
+    display: table-cell;
+}
+.continer-td{
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: space-evenly; 
 }
-
 .sliding-email-header{
     display: flex;
     flex-direction: row;
