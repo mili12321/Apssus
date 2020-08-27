@@ -2,7 +2,9 @@
     justify-content: end;
     align-items: baseline;
 }
-
+.lineT {
+    text-decoration: line-through;
+}
 .note {
     width: 300px;
     height: 300px;

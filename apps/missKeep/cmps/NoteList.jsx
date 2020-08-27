@@ -11,7 +11,9 @@ export class NoteList extends React.Component {
         this.setState({ ID })
     }
     lineLi = (id) => {
-        console.log(id);
+        
+        let li = document.querySelector(`.${id}`)
+        li.classList.toggle('lineT')
     }
     NoteInlineInput = (props) => {
         console.log(props)
@@ -31,18 +33,21 @@ export class NoteList extends React.Component {
     render() {
         const notes = this.props.Notes
         var noteId;
+        console.log(notes)
         return <div className="note-list">
-            {
+            { 
                 notes.map(note =>
                     <div className="note" key={note.id}>
                         {note.txt && <div>
                             <h1>{note.txt}</h1>
                             {note.list && note.list.map(todo =>
-                                <li id={keepService.makeId()} >{todo}</li>
+                                <li className={todo.id} onClick={()=> {
+                                  {this.lineLi(todo.id)}
+                                }}>{todo.txt}</li>
                             )
                             }
                             <button>trash</button>
-                            <button className="fa-pencil-alt" onClick={this.setEdit}></button>
+                            <button className="fas fa-pencil-alt" onClick={this.setEdit}></button>
                             {this.NoteInlineInput(note.id)}
                         </div>}
                         {note.youtube && <iframe width="300" height="220"

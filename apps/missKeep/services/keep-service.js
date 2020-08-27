@@ -124,7 +124,7 @@ function newListNote(li, noteId) {
     const notes = loadFromStorage(NOTE_KEY)
     const idx = notes.findIndex(note => note.id === noteId)
     if (!notes[idx].list) notes[idx].list = []
-    notes[idx].list.push(li)
+    notes[idx].list.push({txt:li, id:makeId()})
     saveToStorage(NOTE_KEY, notes)
     return Promise.resolve()
 }
@@ -161,7 +161,7 @@ function getNotes(text) {
         }
         if(note.list) {
             note.list.map((li) => {
-                 if (li.includes(text) && !newNotes.includes(note))
+                 if (li.txt.includes(text) && !newNotes.includes(note))
                 newNotes.push(note)
             } ) }
     })

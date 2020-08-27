@@ -122,7 +122,10 @@ function newListNote(li, noteId) {
     return note.id === noteId;
   });
   if (!notes[idx].list) notes[idx].list = [];
-  notes[idx].list.push(li);
+  notes[idx].list.push({
+    txt: li,
+    id: makeId()
+  });
   saveToStorage(NOTE_KEY, notes);
   return Promise.resolve();
 }
@@ -160,7 +163,7 @@ function getNotes(text) {
 
       if (note.list) {
         note.list.map(function (li) {
-          if (li.includes(text) && !newNotes.includes(note)) newNotes.push(note);
+          if (li.txt.includes(text) && !newNotes.includes(note)) newNotes.push(note);
         });
       }
     });
