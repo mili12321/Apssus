@@ -5,6 +5,9 @@
 .lineT {
     text-decoration: line-through;
 }
+.trash {
+    color: black;
+}
 .note {
     width: 300px;
     height: 300px;
