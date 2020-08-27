@@ -3,7 +3,9 @@ export const emailService = {
     getById,
     saveToStorage,
     loadFromStorage,
-    remove
+    remove,
+    add,
+    getEmpty
 }
 const KEY = 'emails'
 
@@ -22,6 +24,7 @@ var emails = [
    
 ]
 let gEmails;
+window.theEmails = emails
 
 function query() {
     gEmails = loadFromStorage(KEY)
@@ -43,8 +46,21 @@ function remove(idx){
     console.log(gEmails)
 }
 
+function add(email){
 
-
+    const emailToAdd = {
+        id:makeId(),
+        ...email
+    }
+    gEmails=[emailToAdd, ...gEmails]
+    // gEmails.unshift(email);
+    saveToStorage(KEY, gEmails)
+    console.log(gEmails)
+    window.theEmails = gEmails
+}
+function getEmpty(){
+    return {sender: '',subject:'', body:''}
+}
 
 function makeId(length = 5) {
     var txt = '';

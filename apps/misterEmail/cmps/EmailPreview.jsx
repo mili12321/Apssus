@@ -1,23 +1,5 @@
-// export function EmailPreview({ email }) {
-//     return <tr className="email-preview" key={ email.id }>
-//                 <td className="email-icons">icons</td>
-//                 <td className="email-subject">
-//                     { email.subject }
-//                 </td>
-//                 <td className="email-body">
-//                     { email.body }
-//                     Lorem, ipsum dolor sit amet consectetur adipisicing.
-//                 </td>
-//                 <td className="email-time"> 
-//                   { email.sentAt }
-//                   <div className="email-options">
-//                       <i class="fas fa-envelope"></i>
-//                       {/* <i class="fas fa-envelope-open"></i> */}
-//                       <i class="fas fa-trash"></i>
-//                   </div>
-//                 </td>
-//             </tr>
-// }
+const { Link } = ReactRouterDOM
+
 import { emailService } from '../../services/email-service.js'
 import { EmailDetails } from './EmailDetails.jsx'
 export class EmailPreview extends React.Component {
@@ -37,6 +19,8 @@ export class EmailPreview extends React.Component {
     this.setState({showMailbyClick:'showMail'})
     this.setState({openEmail:'gray'})
   }
+
+
   // togglereadMail = (ev) =>{
   //   ev.preventDefault();
   //   if(this.state.isReadIcon==='-open'){
@@ -96,9 +80,11 @@ export class EmailPreview extends React.Component {
                       <i className="fas fa-trash" onClick={ () => this.onRemoveEmail(this.props.idx) }></i>
                     </div>
                     <div className="round-div">
-                      <i className="fas fa-expand" onClick={()=>{
-                        <EmailDetails email={this.props.email}/>
-                      }}></i>
+                      <Link to={`/EmailApp/${this.props.email.id}`}>
+                        <i className="fas fa-expand" onClick={()=>{
+                          <EmailDetails email={this.props.email}/>
+                        }}></i>
+                      </Link>
                     </div>
                    
                   </div>
