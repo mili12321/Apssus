@@ -1,6 +1,6 @@
 import { EmailPreview } from 'EmailPreview.jsx'
 
-export function EmailList({ emails, onRemoveEmail }) {
+export function EmailList({ emails, onRemoveEmail,onCountUnreadMails }) {
     return (
             <div className="email-list-container">
                 <table>

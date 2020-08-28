@@ -5,27 +5,29 @@ export const emailService = {
     loadFromStorage,
     remove,
     add,
-    getEmpty
+    getEmpty,
+    CountUnreadMails,
+    checkIfRead
 }
 const KEY = 'emails'
 
 var emails = [
-    { id: 'm101', sender: 'mili', subject: 'Wassap?', body: 'Pick up!', isRead: false, sentAt : 1551133930594},
-    { id: 'm102', sender: 'mili', subject: 'Wassap?', body: 'Pick up!', isRead: false, sentAt : 1551133930594},
-    { id: 'm103', sender: 'mili', subject: 'Wassap?', body: 'Pick up!', isRead: false, sentAt : 1551133930594},
-    { id: 'm104', sender: 'mili', subject: 'Wassap?', body: 'Pick up!', isRead: false, sentAt : 1551133930594},
-    { id: 'm105', sender: 'mili', subject: 'Wassap?', body: 'Pick up!', isRead: false, sentAt : 1551133930594},
-    { id: 'm106', sender: 'mili', subject: 'Wassap?', body: 'Pick up!', isRead: false, sentAt : 1551133930594},
-    { id: 'm107', sender: 'mili', subject: 'Wassap?', body: 'Pick up!', isRead: false, sentAt : 1551133930594},
-    { id: 'm108', sender: 'mili', subject: 'Wassap?', body: 'Pick up!', isRead: false, sentAt : 1551133930594},
-    { id: 'm109', sender: 'mili', subject: 'Wassap?', body: 'Pick up!', isRead: false, sentAt : 1551133930594},
-    { id: 'm1010', sender: 'mili', subject: 'Wassap?', body: 'Pick up!', isRead: false, sentAt : 1551133930594},
-    { id: 'm1011', sender: 'mili', subject: 'Wassap?', body: 'Pick up!', isRead: false, sentAt : 1551133930594}
+    { id: 'm101', sender: 'mili', subject: 'Wassap?', body: 'Pick up!', isRead: false, opend:0, sentAt : 1551133930594},
+    { id: 'm102', sender: 'mili', subject: 'Wassap?', body: 'Pick up!', isRead: false, opend:0, sentAt : 1551133930594},
+    { id: 'm103', sender: 'mili', subject: 'Wassap?', body: 'Pick up!', isRead: false, opend:0, sentAt : 1551133930594},
+    { id: 'm104', sender: 'mili', subject: 'Wassap?', body: 'Pick up!', isRead: false, opend:0, sentAt : 1551133930594},
+    { id: 'm105', sender: 'mili', subject: 'Wassap?', body: 'Pick up!', isRead: false, opend:0, sentAt : 1551133930594},
+    { id: 'm106', sender: 'mili', subject: 'Wassap?', body: 'Pick up!', isRead: false, opend:0, sentAt : 1551133930594},
+    { id: 'm107', sender: 'mili', subject: 'Wassap?', body: 'Pick up!', isRead: false, opend:0, sentAt : 1551133930594},
+    { id: 'm108', sender: 'mili', subject: 'Wassap?', body: 'Pick up!', isRead: false, opend:0, sentAt : 1551133930594},
+    { id: 'm109', sender: 'mili', subject: 'Wassap?', body: 'Pick up!', isRead: false, opend:0, sentAt : 1551133930594},
+    { id: 'm1010', sender: 'mili', subject: 'Wassap?', body: 'Pick up!', isRead: false, opend:0, sentAt : 1551133930594},
+    { id: 'm1011', sender: 'mili', subject: 'Wassap?', body: 'Pick up!', isRead: false, opend:0, sentAt : 1551133930594}
    
 ]
 let gEmails;
 window.theEmails = emails
-
+let count = emails.length
 function query() {
     gEmails = loadFromStorage(KEY)
     if(!gEmails){
@@ -36,14 +38,24 @@ function query() {
 }
 
 function getById(emailId) {
-    const email = mails.find(email => email.id === emailId)
+    const email = gEmails.find(email => email.id === emailId)
     return Promise.resolve(email)
+}
+function checkIfRead(idx){
+    gEmails[idx].isRead = true
+    saveToStorage(KEY, gEmails)
+    console.log(idx)
+}
+function CountUnreadMails(){
+    console.log(count)
+    return count
 }
 
 function remove(idx){
     gEmails.splice(idx, 1);
     saveToStorage(KEY, gEmails)
     console.log(gEmails)
+    count--
 }
 
 function add(email){
@@ -57,6 +69,7 @@ function add(email){
     saveToStorage(KEY, gEmails)
     console.log(gEmails)
     window.theEmails = gEmails
+    count++
 }
 function getEmpty(){
     return {sender: '',subject:'', body:''}

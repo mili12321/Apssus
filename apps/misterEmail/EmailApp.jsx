@@ -10,8 +10,13 @@ export class EmailApp extends React.Component {
         emails: [],
         isModalShown: false
     }
+    onCountUnreadMails = () =>{
+        const count = emailService.CountUnreadMails()
+        return count
+    }
     componentDidMount() {
         this.loadEmails();
+        this.onCountUnreadMails()
     }
     loadEmails() {
         emailService.query()
@@ -60,32 +65,32 @@ export class EmailApp extends React.Component {
                     />
                     <button onClick={this.addEmail}>add</button> */}
 
-                    <div className="email-option new-mail" onClick={this.onToggleModal}><i class="fas fa-plus"></i><span className='compose'>Compose</span></div>
+                    <div className="email-option new-mail" onClick={this.onToggleModal}><i className="fas fa-plus"></i><span className='compose'>Compose</span></div>
                    <div className="option-continer inbox-continer">
-                        <div className="email-option inbox"><i class="fas fa-inbox"></i><span>Inbox</span></div>
+                <div className="email-option inbox"><i className="fas fa-inbox"></i><span>Inbox</span><span>{this.onCountUnreadMails()}</span></div>
                    </div>
                     <div className="option-continer">
-                        <div className="email-option starred"><i class="fas fa-star"></i><span>Starred</span></div>
+                        <div className="email-option starred"><i className="fas fa-star"></i><span>Starred</span></div>
                     </div>
                     <div className="option-continer">
-                        <div className="email-option sent-mail"><i class="fas fa-share-square"></i><span>Sent mail</span></div>
+                        <div className="email-option sent-mail"><i className="fas fa-share-square"></i><span>Sent mail</span></div>
                     </div>
                    <div className="option-continer">
-                        <div className="email-option drafs"><i class="fab fa-firstdraft"></i><span>Drafs</span></div>
+                        <div className="email-option drafs"><i className="fab fa-firstdraft"></i><span>Drafs</span></div>
                    </div>
                 </div>
-                <EmailList emails={ this.state.emails } onRemoveEmail={this.onRemoveEmail}/>
+                <EmailList emails={ this.state.emails } onRemoveEmail={this.onRemoveEmail} />
 
 
                 <EmailCompose isModalShown={this.state.isModalShown} onToggleModal={this.onToggleModal}>
                     <div className="modal-sender">
-                        <span className="input-reference" >Cc:</span><input name='sender' value={this.state.emailToAdd.sender} 
+                        <span className="input-reference" >Cc:</span><input className="mail-input" name='sender' value={this.state.emailToAdd.sender} 
                             // placeholder='Example@gmail.com'
                             type="text" onChange={this.onInputChange}
                         />
                     </div>
                     <div className="modal-subject">
-                       <span className="input-reference">Subject:</span><input name='subject' value={this.state.emailToAdd.subject}
+                       <span className="input-reference">Subject:</span><input className="mail-input" name='subject' value={this.state.emailToAdd.subject}
                             // placeholder='subject' 
                             type="text" onChange={this.onInputChange}
                         />

@@ -8,16 +8,38 @@ export class EmailPreview extends React.Component {
       isReadIcon:'',
       fontWeight: 'bold',
       showMailbyClick: '',
-      openEmail: ''
+      openEmail: '',
+      isOpen: false
   }
-  
-  onReadMail = (ev) =>{
+
+
+  onToggleMail = (ev) =>{
+    ev.stopPropagation()
     ev.preventDefault();
+    this.state.isOpen? this.onReadMail(ev) : this.onUnreadMail(ev);
+    this.setState({isOpen:!this.state.isOpen})
+  }
+
+
+  onReadMail = (idx) =>{
+    // ev.stopPropagation()
+    // ev.preventDefault();
     this.setState({isReadIcon:'-open'})
     this.setState({fontWeight:''})
     console.log('read')
     this.setState({showMailbyClick:'showMail'})
     this.setState({openEmail:'gray'})
+    emailService.checkIfRead(idx)
+  }
+  onUnreadMail = (ev) => {
+    ev.stopPropagation()
+    ev.preventDefault();
+    this.setState({isReadIcon:''})
+    this.setState({fontWeight:'bold'})
+    console.log('unread')
+    this.setState({showMailbyClick:''})
+    this.setState({openEmail:''})
+    //todo: add emailService.checkIfRead(idx)
   }
 
 
@@ -45,7 +67,7 @@ export class EmailPreview extends React.Component {
   
       return (
       <React.Fragment>
-        <tr className={`email-preview ${this.state.openEmail}`} onClick={this.onReadMail}>
+        <tr className={`email-preview ${this.state.openEmail}`} onClick={()=>{this.onReadMail(this.props.idx)}}>
           <td className="email-icons">icons</td>
           <td className={`email-sender ${this.state.fontWeight}`}>{this.props.email.sender}</td>
           <td className={`email-subject ${this.state.fontWeight}`}>
@@ -59,7 +81,7 @@ export class EmailPreview extends React.Component {
             <div  className="time">{ this.props.email.sentAt }</div>
             <div className="email-options">
                 <div className="round-div-on-hover-fa-envelope"></div>
-                <i className={`fas fa-envelope${this.state.isReadIcon} center`} onClick={this.togglereadMail}></i>
+                <i className={`fas fa-envelope${this.state.isReadIcon} center`} onClick={this.onToggleMail}></i>
                 <div className="round-div-on-hover-fa-trash"></div>
                 <i className="fas fa-trash center" onClick={ () => this.props.onRemoveEmail(this.props.idx) }></i>
             
