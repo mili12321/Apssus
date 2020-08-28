@@ -84,13 +84,13 @@ export class EmailApp extends React.Component {
 
                 <EmailCompose isModalShown={this.state.isModalShown} onToggleModal={this.onToggleModal}>
                     <div className="modal-sender">
-                        <span className="input-reference" >Cc:</span><input name='sender' value={this.state.emailToAdd.sender} 
+                        <span className="input-reference" >Cc:</span><input className="mail-input" name='sender' value={this.state.emailToAdd.sender} 
                             // placeholder='Example@gmail.com'
                             type="text" onChange={this.onInputChange}
                         />
                     </div>
                     <div className="modal-subject">
-                       <span className="input-reference">Subject:</span><input name='subject' value={this.state.emailToAdd.subject}
+                       <span className="input-reference">Subject:</span><input className="mail-input" name='subject' value={this.state.emailToAdd.subject}
                             // placeholder='subject' 
                             type="text" onChange={this.onInputChange}
                         />
