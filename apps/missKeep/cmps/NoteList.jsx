@@ -52,7 +52,7 @@ export class NoteList extends React.Component {
                             {note.list && note.list.map(todo =>
                                <div> <li className={todo.id} onClick={() => {
                                     { this.lineLi(todo.id) }
-                                }}>{todo.txt}<span className="fas fa-trash trash"></span></li></div>
+                                }}>{todo.txt}<span className="fas fa-trash"></span></li></div>
                                )
                             }
                             
@@ -73,10 +73,10 @@ export class NoteList extends React.Component {
                                 this.props.delete(note.id)
                             }}>
                             </button>
-                            <button className="fas fa-thumbtack pin" onClick={() => {
+                            <span class="pin" onClick={() => {
                                 this.props.pin(note.id)
-                            }}>
-                            </button>
+                            }}>📌
+                            </span>
                         </div>
                     </div>
                 )

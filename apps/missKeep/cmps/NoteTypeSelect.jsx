@@ -39,7 +39,7 @@ export class NoteTypeSelect extends React.Component {
         return <div>
             <button className="fas fa-image" onClick={this.setImage}></button>
             <button className="fab fa-youtube" onClick={this.setYoutube}></button>
-            <button  onClick={this.setAudio}></button>
+            {/* <button  onClick={this.setAudio}></button> */}
             {this.NoteSelect(this.state.curr)}
         </div>
     }

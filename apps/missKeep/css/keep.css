@@ -2,12 +2,24 @@
     justify-content: end;
     align-items: baseline;
 }
+
+.pin {
+    opacity: 0.7;
+}
+
+.pin:hover {
+    transform: rotate(-43deg);
+    opacity: 1;
+}
+
 .lineT {
     text-decoration: line-through;
 }
+
 .trash {
     color: black;
 }
+
 .note {
     width: 300px;
     height: 300px;
@@ -20,7 +32,6 @@
     align-items: center;
     flex-direction: column;
     border: solid transparent;
-   
 }
 
 .note-list {
