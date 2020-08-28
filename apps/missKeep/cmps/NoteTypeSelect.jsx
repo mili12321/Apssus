@@ -32,13 +32,13 @@ export class NoteTypeSelect extends React.Component {
                 this.props.onNewNoteAudio(ev.target.value)
                 }
             }}/>
-            default: return <div>what?</div>
+            default: return <div></div>
         }
     }
     render() {
-        return <div>
-            <button className="fas fa-image" onClick={this.setImage}></button>
-            <button className="fab fa-youtube" onClick={this.setYoutube}></button>
+        return <div className="note-opt-container">
+            <div className="image" onClick={this.setImage}><img className="image" src="https://img.icons8.com/officel/48/000000/add-image.png"/></div>
+            <div className="youtube" onClick={this.setYoutube}><img className="youtube" src="https://img.icons8.com/color/48/000000/youtube.png"/></div>
             {/* <button  onClick={this.setAudio}></button> */}
             {this.NoteSelect(this.state.curr)}
         </div>

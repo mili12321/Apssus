@@ -56,7 +56,7 @@ export class NoteList extends React.Component {
                                )
                             }
                             
-                            <button className="fas fa-pencil-alt pencil" onClick={this.setEdit}></button>
+                           
                             {this.NoteInlineInput(note.id)}
                         </div>}
                         {note.youtube && <iframe width="300" height="220"
@@ -68,15 +68,16 @@ export class NoteList extends React.Component {
                             <source src="horse.ogg" type="audio/ogg" />
                             <source src="horse.mp3" type="audio/mpeg" />
                         </audio>}
-                        <div className="flex note-mod">
-                            <button className="fas fa-trash-alt delete" onClick={() => {
+                        <div className="note-mod">
+                            {note.txt &&  <div className="pencil" onClick={this.setEdit}><img src="https://img.icons8.com/plasticine/40/000000/pencil.png"/></div>}
+                            <div className="delete" onClick={() => {
                                 this.props.delete(note.id)
                             }}>
-                            </button>
-                            <span class="pin" onClick={() => {
+                           🗑️</div>
+                            <div class="pin" onClick={() => {
                                 this.props.pin(note.id)
                             }}>📌
-                            </span>
+                            </div>
                         </div>
                     </div>
                 )

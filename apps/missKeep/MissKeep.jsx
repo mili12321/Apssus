@@ -59,18 +59,24 @@ export class MissKeep extends React.Component {
     }
 
     render() {
-        return (<div className="main-Container center">
+        return (<div className="main-Container">
             <section>
-                search notes:<input type="search" onChange={(ev) => {
-                        this.onSearchNotes(ev.target.value)
-                        // ev.target.value = ''
-                    }
-                } />
-                <ComposeNote onWriteNote={this.writeNote} />
-                <button onClick={this.saveNewNote}>save!</button>
+                <div className="ComposeNote-container">
+                    Search Note:<input className="search-input" type="search" onChange={(ev) => {
+                            this.onSearchNotes(ev.target.value)
+                            // ev.target.value = ''
+                        }
+                    } />
+                </div>
+         
+                <div className='ComposeNote-container'>
+                    <ComposeNote onWriteNote={this.writeNote} />
+                    <button className="save-btn" onClick={this.saveNewNote}>save!</button>
+                </div>
+
                 <NoteTypeSelect onNewNoteImage={this.newNoteImage} onNewNoteYoutube={this.newNoteYoutube} onNewNoteAudio={this.newNoteAudio} />
             </section>
-            <div>
+            <div className="grid-container">
                 <NoteList delete={this.DeleteNote} pin={this.PinNote} Notes={this.state.notes} onInlineInput={this.inlineInput} />
             </div>
         </div>
