@@ -6,22 +6,23 @@ export const emailService = {
     remove,
     add,
     getEmpty,
-    CountUnreadMails
+    CountUnreadMails,
+    checkIfRead
 }
 const KEY = 'emails'
 
 var emails = [
-    { id: 'm101', sender: 'mili', subject: 'Wassap?', body: 'Pick up!', isRead: false, sentAt : 1551133930594},
-    { id: 'm102', sender: 'mili', subject: 'Wassap?', body: 'Pick up!', isRead: false, sentAt : 1551133930594},
-    { id: 'm103', sender: 'mili', subject: 'Wassap?', body: 'Pick up!', isRead: false, sentAt : 1551133930594},
-    { id: 'm104', sender: 'mili', subject: 'Wassap?', body: 'Pick up!', isRead: false, sentAt : 1551133930594},
-    { id: 'm105', sender: 'mili', subject: 'Wassap?', body: 'Pick up!', isRead: false, sentAt : 1551133930594},
-    { id: 'm106', sender: 'mili', subject: 'Wassap?', body: 'Pick up!', isRead: false, sentAt : 1551133930594},
-    { id: 'm107', sender: 'mili', subject: 'Wassap?', body: 'Pick up!', isRead: false, sentAt : 1551133930594},
-    { id: 'm108', sender: 'mili', subject: 'Wassap?', body: 'Pick up!', isRead: false, sentAt : 1551133930594},
-    { id: 'm109', sender: 'mili', subject: 'Wassap?', body: 'Pick up!', isRead: false, sentAt : 1551133930594},
-    { id: 'm1010', sender: 'mili', subject: 'Wassap?', body: 'Pick up!', isRead: false, sentAt : 1551133930594},
-    { id: 'm1011', sender: 'mili', subject: 'Wassap?', body: 'Pick up!', isRead: false, sentAt : 1551133930594}
+    { id: 'm101', sender: 'mili', subject: 'Wassap?', body: 'Pick up!', isRead: false, opend:0, sentAt : 1551133930594},
+    { id: 'm102', sender: 'mili', subject: 'Wassap?', body: 'Pick up!', isRead: false, opend:0, sentAt : 1551133930594},
+    { id: 'm103', sender: 'mili', subject: 'Wassap?', body: 'Pick up!', isRead: false, opend:0, sentAt : 1551133930594},
+    { id: 'm104', sender: 'mili', subject: 'Wassap?', body: 'Pick up!', isRead: false, opend:0, sentAt : 1551133930594},
+    { id: 'm105', sender: 'mili', subject: 'Wassap?', body: 'Pick up!', isRead: false, opend:0, sentAt : 1551133930594},
+    { id: 'm106', sender: 'mili', subject: 'Wassap?', body: 'Pick up!', isRead: false, opend:0, sentAt : 1551133930594},
+    { id: 'm107', sender: 'mili', subject: 'Wassap?', body: 'Pick up!', isRead: false, opend:0, sentAt : 1551133930594},
+    { id: 'm108', sender: 'mili', subject: 'Wassap?', body: 'Pick up!', isRead: false, opend:0, sentAt : 1551133930594},
+    { id: 'm109', sender: 'mili', subject: 'Wassap?', body: 'Pick up!', isRead: false, opend:0, sentAt : 1551133930594},
+    { id: 'm1010', sender: 'mili', subject: 'Wassap?', body: 'Pick up!', isRead: false, opend:0, sentAt : 1551133930594},
+    { id: 'm1011', sender: 'mili', subject: 'Wassap?', body: 'Pick up!', isRead: false, opend:0, sentAt : 1551133930594}
    
 ]
 let gEmails;
@@ -41,8 +42,9 @@ function getById(emailId) {
     return Promise.resolve(email)
 }
 function checkIfRead(idx){
-    emails[idx].isRead = true
-    //todo: load to storage? how ro render the change
+    gEmails[idx].isRead = true
+    saveToStorage(KEY, gEmails)
+    console.log(idx)
 }
 function CountUnreadMails(){
     console.log(count)

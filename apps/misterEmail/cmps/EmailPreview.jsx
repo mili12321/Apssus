@@ -21,15 +21,15 @@ export class EmailPreview extends React.Component {
   }
 
 
-  onReadMail = (ev) =>{
-    ev.stopPropagation()
-    ev.preventDefault();
+  onReadMail = (idx) =>{
+    // ev.stopPropagation()
+    // ev.preventDefault();
     this.setState({isReadIcon:'-open'})
     this.setState({fontWeight:''})
     console.log('read')
     this.setState({showMailbyClick:'showMail'})
     this.setState({openEmail:'gray'})
-    //todo: add emailService.checkIfRead(idx)
+    emailService.checkIfRead(idx)
   }
   onUnreadMail = (ev) => {
     ev.stopPropagation()
@@ -67,7 +67,7 @@ export class EmailPreview extends React.Component {
   
       return (
       <React.Fragment>
-        <tr className={`email-preview ${this.state.openEmail}`} onClick={this.onReadMail}>
+        <tr className={`email-preview ${this.state.openEmail}`} onClick={()=>{this.onReadMail(this.props.idx)}}>
           <td className="email-icons">icons</td>
           <td className={`email-sender ${this.state.fontWeight}`}>{this.props.email.sender}</td>
           <td className={`email-subject ${this.state.fontWeight}`}>
