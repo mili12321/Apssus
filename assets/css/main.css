@@ -2,9 +2,11 @@
 @import "../../apps/MissKeep/css/Keep.css"; 
 @import "../../apps/home/assets/css/home.css"; 
 @import "navbar.css"; 
+@import "background.css"; 
 body {
     padding: 0;
     margin: 0;
+    overflow-x: hidden;
 }
 
 .main-Contaoner{
@@ -13,4 +15,15 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+}
+
+.notification-container{
+    width: 50vw;
+    height: 10vw;
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    text-align: center;
+    /* background-color: rgb(207, 207, 207); */
 }

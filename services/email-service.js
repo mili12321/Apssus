@@ -68,6 +68,8 @@ function add(email){
 
     const emailToAdd = {
         id:makeId(),
+        // isRead:false,
+        // sentAt:Date.now(),
         ...email
     }
     gEmails=[emailToAdd, ...gEmails]

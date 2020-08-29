@@ -83,9 +83,10 @@ export class EmailPreview extends React.Component {
           <td className="email-body">
               { this.props.email.body }
               Lorem, ipsum dolor sit amet consectetur adipisicing.
+              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Facere, quia. Veritatis praesentium expedita nemo quas explicabo quo sit nihil veniam sunt illum modi ut amet obcaecati culpa beatae, voluptatibus id!
           </td>
           <td className={`email-time  ${this.state.fontWeight}`}> 
-            <div  className="time">{ this.props.email.sentAt }</div>
+            <div  className="time">{ this.props.email.sentAt}</div>
             <div className="email-options">
                 <div className="round-div-on-hover-fa-envelope"></div>
                 <i className={`fas fa-envelope${this.state.isReadIcon} center`} onClick={this.onToggleMail}></i>
