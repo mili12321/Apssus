@@ -8,7 +8,8 @@ export const keepService = {
     newNoteAudio,
     newListNote,
     searchNotes,
-    makeId
+    makeId,
+    deleteTodo
 }
 
 //storage
@@ -63,38 +64,52 @@ function PinNote(noteId) {
 
 
 var gNotes = [{
-    txt: 'this is a list',
-    id: makeId(),
-    list: [{txt: 'hello its me', id: makeId()}, {txt: 'hello its me', id: makeId()}, {txt: 'hello its me', id: makeId()}]
-},
+        txt: 'this is a list',
+        id: makeId(),
+        list: [{
+            txt: 'hello its me',
+            id: makeId()
+        }, {
+            txt: 'hello its me',
+            id: makeId()
+        }, {
+            txt: 'hello its me',
+            id: makeId()
+        }]
+    },
 
-{
-    id: makeId(),
-    youtube: `https://www.youtube.com/embed/tgbNymZ7vqY`,
-},
-{
-    id: makeId(),
-    img: 'https://compote.slate.com/images/18ba92e4-e39b-44a3-af3b-88f735703fa7.png?width=780&height=520&rect=1560x1040&offset=0x0'
-},
-{
-    txt: 'hello react',
-    id: makeId()
-}
-// {
-//     txt: null,
-//     id: makeId(),
-//     audio: '',
-// },
+    {
+        id: makeId(),
+        youtube: `https://www.youtube.com/embed/tgbNymZ7vqY`,
+    },
+    {
+        id: makeId(),
+        img: 'https://compote.slate.com/images/18ba92e4-e39b-44a3-af3b-88f735703fa7.png?width=780&height=520&rect=1560x1040&offset=0x0'
+    },
+    {
+        txt: 'hello react',
+        id: makeId()
+    }
+    // {
+    //     txt: null,
+    //     id: makeId(),
+    //     audio: '',
+    // },
 
 
 ]
 
 
 
-function noteById(noteId) {
-
+function deleteTodo(todoId,noteId) {
+    // debugger;
+    const notes = loadFromStorage(NOTE_KEY)
+    console.log(notes);
+    const idx = notes.findIndex(note => note.id === noteId)
+    const todoIdx = notes[idx].list.findIndex(note => note.id === todoId)
+    notes[idx].list.splice(todoIdx, 1)
+    saveToStorage(NOTE_KEY, notes)
 }
-
 
 function newNoteAudio(url) {
     const notes = loadFromStorage(NOTE_KEY)
@@ -146,7 +161,10 @@ function newListNote(li, noteId) {
     const notes = loadFromStorage(NOTE_KEY)
     const idx = notes.findIndex(note => note.id === noteId)
     if (!notes[idx].list) notes[idx].list = []
-    notes[idx].list.push({txt:li, id:makeId()})
+    notes[idx].list.push({
+        txt: li,
+        id: makeId()
+    })
     console.log(notes[idx]);
     saveToStorage(NOTE_KEY, notes)
     return Promise.resolve()
@@ -173,25 +191,25 @@ function getNotes(text) {
         }
 
         return Promise.resolve(notes);
+    } else {
+        const notes = loadFromStorage(NOTE_KEY)
+        let newNotes = []
+        notes.forEach((note) => {
+            if (note.txt) {
+                if (note.txt.includes(text) && !newNotes.includes(note))
+                    newNotes.push(note)
+            }
+            if (note.list) {
+                note.list.map((li) => {
+                    if (li.txt.includes(text) && !newNotes.includes(note))
+                        newNotes.push(note)
+                })
+            }
+        })
+
+        console.log(newNotes)
+        return Promise.resolve(newNotes);
     }
-   else {
-    const notes = loadFromStorage(NOTE_KEY)
-    let newNotes = []
-    notes.forEach((note) => {
-        if(note.txt) {
-        if (note.txt.includes(text) && !newNotes.includes(note))
-            newNotes.push(note)
-        }
-        if(note.list) {
-            note.list.map((li) => {
-                 if (li.txt.includes(text) && !newNotes.includes(note))
-                newNotes.push(note)
-            } ) }
-    })
-     
-    console.log(newNotes)
-    return Promise.resolve(newNotes);
-}
 }
 
 

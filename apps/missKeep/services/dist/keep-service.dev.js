@@ -14,7 +14,8 @@ var keepService = {
   newNoteAudio: newNoteAudio,
   newListNote: newListNote,
   searchNotes: searchNotes,
-  makeId: makeId
+  makeId: makeId,
+  deleteTodo: deleteTodo
 }; //storage
 
 exports.keepService = keepService;
@@ -91,7 +92,19 @@ var gNotes = [{
 // },
 ];
 
-function noteById(noteId) {}
+function deleteTodo(todoId, noteId) {
+  // debugger;
+  var notes = loadFromStorage(NOTE_KEY);
+  console.log(notes);
+  var idx = notes.findIndex(function (note) {
+    return note.id === noteId;
+  });
+  var todoIdx = notes[idx].list.findIndex(function (note) {
+    return note.id === todoId;
+  });
+  notes[idx].list.splice(todoIdx, 1);
+  saveToStorage(NOTE_KEY, notes);
+}
 
 function newNoteAudio(url) {
   var notes = loadFromStorage(NOTE_KEY);
