@@ -9,17 +9,18 @@
     margin-top: 20px;
 }
 .email-options-container{
-    /* background-color: rgb(252, 86, 169); */
+   
     /* max-width: 300px; */
     /* min-width: 200px; */
     width: 300px;
     display: flex;
     flex-direction: column;
+    color: rgb(255, 255, 255);
     /* justify-content: flex-start; */
    
 }
 /* .email-list-container{
-    background-color: rgb(241, 240, 240);
+  
     padding: 30px;
     margin-right: 25px;
     width: calc(100% - 25px);
@@ -75,13 +76,13 @@ tr:hover .time{
 }
 /* .email-time::before{
     position: absolute;
-    color: rgb(124, 14, 14);
+    
     content: '';
     top: 0;
     left:-80px;
     width: 200px;
     height: 100%;
-    background-color: rgb(255, 195, 240);
+ 
 
 } */
 .new-mail{
@@ -105,7 +106,7 @@ tr:hover .time{
     cursor: pointer;
 }
 .fas, .fab{
-    color: rgb(110, 110, 110);
+    color: rgb(221, 221, 221);
     cursor: pointer;
 }
 .option-continer:hover{
@@ -131,8 +132,15 @@ tr:hover .time{
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
+.Read-btn{
+    color: white;
+}
+.UnRead-btn{
+    color: white;
+}
 .compose{
     align-self: center;
+    color: #000;
 }
 table{
     width: 100%;
@@ -200,12 +208,18 @@ table{
 .round-div a{
     align-self: center; 
 }
+.Inbox{
+    margin-right: 5px;
+}
 @media only screen and (min-width: 816px) {
     .email-list-container {
-        background-color: rgba(241, 240, 240, 0.719);
+        background-color: rgba(246, 226, 255, 0.616);
         margin-right: 25px;
         width: calc(100% - 25px);
         padding: 30px;
+        border: 1px solid;
+        box-shadow: 5px 10px 18px #e4b7ff;
+        border-radius: 7px;
     }
 }
 @media only screen and (max-width: 815px) {

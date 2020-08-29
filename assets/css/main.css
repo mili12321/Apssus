@@ -30,15 +30,16 @@ body {
     left: 50%;
     transform: translate(-50%,-50%);
     text-align: center;
-    background-color: rgba(247, 127, 227, 0.493);
+    background-color: rgba(193, 117, 255, 0.548);
     border-radius: 20px;
+    line-height: 10vw;
     
 }
 
 .navbar-link {
     text-decoration: none;
-    color: black;
+    color:rgb(41, 0, 65)
     font-family: 'Times New Roman', Times, serif;
     letter-spacing: 0.5px;
-    margin-top: 10px;
+    margin: 10px;
 }

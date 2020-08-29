@@ -101,7 +101,7 @@ export class EmailApp extends React.Component {
         
         return (
             <React.Fragment> 
-               <h1>{ emailService.getUnreadCount()}</h1>
+               {/* <h1>{ emailService.getUnreadCount()}</h1> */}
             <EmailFilter onFilter={this.setFilter} setFilterIsRead={this.setFilterIsRead} setFilterIsUnRead={this.setFilterIsUnRead} />
 
             <div className="email-app-container">
@@ -123,7 +123,7 @@ export class EmailApp extends React.Component {
 
                     <div className="email-option new-mail" onClick={this.onToggleModal}><i className="fas fa-plus"></i><span className='compose'>Compose</span></div>
                    <div className="option-continer inbox-continer">
-                <div className="email-option inbox" onClick={this.unSetFilter}><i className="fas fa-inbox"></i><span>Inbox</span><span>{this.onCountUnreadMails()}</span></div>
+                <div className="email-option inbox" onClick={this.unSetFilter}><i className="fas fa-inbox"></i><span className="Inbox">Inbox</span><span>{ emailService.getUnreadCount()}</span></div>
                    </div>
                     <div className="option-continer">
                         <div className="email-option starred"><i className="fas fa-star"></i><span>Starred</span></div>
