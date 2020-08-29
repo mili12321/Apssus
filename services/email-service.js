@@ -8,7 +8,8 @@ export const emailService = {
     getEmpty,
     CountUnreadMails,
     changeToRead,
-    changeToUnRead
+    changeToUnRead,
+    getUnreadCount
 }
 const KEY = 'emails'
 
@@ -27,7 +28,7 @@ var emails = [
    
 ]
 let gEmails;
-window.theEmails = emails
+window.theEmails = gEmails
 let count = emails.length
 function query() {
     gEmails = loadFromStorage(KEY)
@@ -42,23 +43,34 @@ function getById(emailId) {
     const email = gEmails.find(email => email.id === emailId)
     return Promise.resolve(email)
 }
-function changeToRead(idx){
-    gEmails[idx].isRead = true
+function changeToRead(id){
+    const index = gEmails.findIndex((email)=>{return email.id===id});
+    gEmails[index].isRead = true
     saveToStorage(KEY, gEmails)
-    console.log(idx)
+    console.log(index,'read')
 }
-function changeToUnRead(idx){
-    gEmails[idx].isRead = false
+function changeToUnRead(id){
+    const index = gEmails.findIndex((email)=>{return email.id===id});
+    gEmails[index].isRead = false
     saveToStorage(KEY, gEmails)
-    console.log(idx)
+    console.log(index,'unread')
 }
 function CountUnreadMails(){
     console.log(count)
     return count
 }
-
-function remove(idx){
-    gEmails.splice(idx, 1);
+function getUnreadCount(){
+    if(!gEmails){return 0}
+    const count = gEmails.filter((email)=>{
+        return !email.isRead
+    }).length
+    console.log(count)
+    return count
+  
+}
+function remove(id){
+    const index = gEmails.findIndex((email)=>{return email.id===id});
+    gEmails.splice(index,1)
     saveToStorage(KEY, gEmails)
     console.log(gEmails)
     count--

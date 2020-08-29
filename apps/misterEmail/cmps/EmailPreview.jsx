@@ -5,49 +5,43 @@ import { EmailDetails } from './EmailDetails.jsx'
 export class EmailPreview extends React.Component {
 
   state = {
-      isReadIcon:'',
-      fontWeight: 'bold',
+      // isReadIcon:'',
+      // fontWeight: 'bold',
       showMailbyClick: '',
       openEmail: '',
       isOpen: false
   }
 
 
-  onToggleMail = (ev) =>{
+  onToggleMail = (ev,id) =>{
     ev.stopPropagation()
     ev.preventDefault();
-    this.state.isOpen? this.onReadMail(ev) : this.onUnreadMail(ev);
-    this.setState({isOpen:!this.state.isOpen})
+    this.props.email.isRead? this.props.onUnreadMail(id) :this.props.onReadMail(id)
+
   }
 
-  onToggleEmailPreview = (idx)=>{
-    this.state.isOpen? this.closeEmail() : this.onReadMail(idx) 
+  onToggleEmailPreview = (id)=>{
+    this.state.isOpen? this.closeEmail() :this.props.onReadMail(id)
     this.setState({isOpen:!this.state.isOpen})
   }
-  onReadMail = (idx) =>{
-    // ev.stopPropagation()
-    // ev.preventDefault();
-    this.setState({isReadIcon:'-open'})
-    this.setState({fontWeight:''})
-    console.log('read')
-    this.setState({showMailbyClick:'showMail'})
-    this.setState({openEmail:'gray'})
-    emailService.changeToRead(idx)
-  }
+  // onReadMail = (idx) =>{
+  //   console.log('read')
+  //   this.setState({showMailbyClick:'showMail'})
+  //   this.setState({openEmail:'gray'})
+  //   emailService.changeToRead(idx)
+  // }
   closeEmail = () =>{
     this.setState({showMailbyClick:''})
     this.setState({openEmail:''})
   }
-  onUnreadMail = (ev) => {
-    ev.stopPropagation()
-    ev.preventDefault();
-    this.setState({isReadIcon:''})
-    this.setState({fontWeight:'bold'})
-    console.log('unread')
-    this.setState({showMailbyClick:''})
-    this.setState({openEmail:''})
-    emailService.changeToUnRead(idx)
-  }
+  // onUnreadMail = (ev) => {
+  //   ev.stopPropagation()
+  //   ev.preventDefault();
+  //   console.log('unread')
+  //   this.setState({showMailbyClick:''})
+  //   this.setState({openEmail:''})
+  //   emailService.changeToUnRead(idx)
+  // }
 
 
   // togglereadMail = (ev) =>{
@@ -74,10 +68,10 @@ export class EmailPreview extends React.Component {
   
       return (
       <React.Fragment>
-        <tr className={`email-preview ${this.state.openEmail}`} onClick={()=>{this.onToggleEmailPreview(this.props.idx)}}>
+        <tr className={`email-preview ${this.state.openEmail}`} onClick={()=>{this.onToggleEmailPreview(this.props.email.id)}}>
           <td className="email-icons">icons</td>
-          <td className={`email-sender ${this.state.fontWeight}`}>{this.props.email.sender}</td>
-          <td className={`email-subject ${this.state.fontWeight}`}>
+          <td className={`email-sender ${this.props.email.isRead?"":"font-bold"}`}>{this.props.email.sender}</td>
+          <td className={`email-subject ${this.props.email.isRead?"":"font-bold"}`}>
               { this.props.email.subject }
           </td>
           <td className="email-body">
@@ -85,13 +79,13 @@ export class EmailPreview extends React.Component {
               Lorem, ipsum dolor sit amet consectetur adipisicing.
               Lorem ipsum dolor, sit amet consectetur adipisicing elit. Facere, quia. Veritatis praesentium expedita nemo quas explicabo quo sit nihil veniam sunt illum modi ut amet obcaecati culpa beatae, voluptatibus id!
           </td>
-          <td className={`email-time  ${this.state.fontWeight}`}> 
+          <td className={`email-time `}> 
             <div  className="time">{ this.props.email.sentAt}</div>
             <div className="email-options">
                 <div className="round-div-on-hover-fa-envelope"></div>
-                <i className={`fas fa-envelope${this.state.isReadIcon} center`} onClick={this.onToggleMail}></i>
+                <i className={`fas fa-envelope${this.props.email.isRead?"-open":""} center`} onClick={(ev)=>{this.onToggleMail(ev,this.props.email.id)}}></i>
                 <div className="round-div-on-hover-fa-trash"></div>
-                <i className="fas fa-trash center" onClick={ () => this.props.onRemoveEmail(this.props.idx) }></i>
+                <i className="fas fa-trash center" onClick={ () => this.props.onRemoveEmail(this.props.email.id) }></i>
             
 
             </div>

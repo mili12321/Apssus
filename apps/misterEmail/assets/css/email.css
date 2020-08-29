@@ -172,6 +172,9 @@ table{
     font-weight: bold;
     align-self: center;
 }
+.font-bold{
+    font-weight: bold;
+}
 .sliding-email-options{
     display: flex;
     flex-direction: row;
