@@ -7,7 +7,8 @@ export const emailService = {
     add,
     getEmpty,
     CountUnreadMails,
-    checkIfRead
+    changeToRead,
+    changeToUnRead
 }
 const KEY = 'emails'
 
@@ -41,8 +42,13 @@ function getById(emailId) {
     const email = gEmails.find(email => email.id === emailId)
     return Promise.resolve(email)
 }
-function checkIfRead(idx){
+function changeToRead(idx){
     gEmails[idx].isRead = true
+    saveToStorage(KEY, gEmails)
+    console.log(idx)
+}
+function changeToUnRead(idx){
+    gEmails[idx].isRead = false
     saveToStorage(KEY, gEmails)
     console.log(idx)
 }

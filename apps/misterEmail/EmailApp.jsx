@@ -1,14 +1,17 @@
 import { emailService } from '../../services/email-service.js'
 import { EmailList } from 'cmps/EmailList.jsx';
 import { EmailCompose } from 'EmailCompose.jsx';
-
+import { EmailFilter } from 'cmps/EmailFilter.jsx';
+import eventBus from '../../services/event-bus-service.js'
 
 
 export class EmailApp extends React.Component {
     state = {
         emailToAdd: emailService.getEmpty(),
         emails: [],
-        isModalShown: false
+        isModalShown: false,
+        filterBy: '',
+        all:false
     }
     onCountUnreadMails = () =>{
         const count = emailService.CountUnreadMails()
@@ -17,6 +20,7 @@ export class EmailApp extends React.Component {
     componentDidMount() {
         this.loadEmails();
         this.onCountUnreadMails()
+        this.setState({all: false});
     }
     loadEmails() {
         emailService.query()
@@ -29,7 +33,9 @@ export class EmailApp extends React.Component {
         emailService.add(this.state.emailToAdd)
         this.setState({emailToAdd:emailService.getEmpty()})
         this.loadEmails();
-       
+    }
+    deleteInputTxt = () =>{
+        this.setState({emailToAdd:emailService.getEmpty()})
     }
     onInputChange=(ev)=>{
         console.log('input', ev.target.name)
@@ -40,16 +46,50 @@ export class EmailApp extends React.Component {
     onToggleModal=()=>{
         this.setState({isModalShown:!this.state.isModalShown})
     }
+    
     onRemoveEmail = (idx) =>{
         console.log('email is removed',idx)
         emailService.remove(idx)
         this.loadEmails()
+        eventBus.emit('notify')
+    }
+    setFilter = (filterBy) =>{
+        console.log("ev.target.value",filterBy);
+        this.setState({filterBy})
+       
+    }
+    setFilterIsRead = () => {
+        this.setState({filterBy: true})
+    }
+    setFilterIsUnRead = () => {
+        this.setState({filterBy: false})
+    }
+    unSetFilter = () =>{
+        this.setState({all: true})
+    }
+    getEmailForDisplay(){
+        if(this.state.all){
+            this.setState({all: false});
+            const emails = this.state.emails 
+            return emails;
+        }
+        
+            const emails = this.state.emails.filter(email =>
+                email.sender.includes(this.state.filterBy) ||
+                email.subject.includes(this.state.filterBy) ||
+                email.body.includes(this.state.filterBy)||
+                email.body.includes(this.state.filterBy)||
+                email.isRead===this.state.filterBy
+            )
+            return emails;
+        
+        
     }
     render() {
-
+        const emails = this.getEmailForDisplay()
         return (
             <div className="email-app-container">
-                
+                <EmailFilter onFilter={this.setFilter} setFilterIsRead={this.setFilterIsRead} setFilterIsUnRead={this.setFilterIsUnRead} />
                 <div className="email-options-container">
                     {/* <input name='sender' value={this.state.emailToAdd.sender} 
                         placeholder='sender name'
@@ -67,7 +107,7 @@ export class EmailApp extends React.Component {
 
                     <div className="email-option new-mail" onClick={this.onToggleModal}><i className="fas fa-plus"></i><span className='compose'>Compose</span></div>
                    <div className="option-continer inbox-continer">
-                <div className="email-option inbox"><i className="fas fa-inbox"></i><span>Inbox</span><span>{this.onCountUnreadMails()}</span></div>
+                <div className="email-option inbox" onClick={this.unSetFilter}><i className="fas fa-inbox"></i><span>Inbox</span><span>{this.onCountUnreadMails()}</span></div>
                    </div>
                     <div className="option-continer">
                         <div className="email-option starred"><i className="fas fa-star"></i><span>Starred</span></div>
@@ -79,10 +119,11 @@ export class EmailApp extends React.Component {
                         <div className="email-option drafs"><i className="fab fa-firstdraft"></i><span>Drafs</span></div>
                    </div>
                 </div>
-                <EmailList emails={ this.state.emails } onRemoveEmail={this.onRemoveEmail} />
+                <EmailList emails={ emails } onRemoveEmail={this.onRemoveEmail} />
+                {/* /*to show all the email =  this.state.emails to show only the email from the filter, eamil to deisplay = emails */}
 
 
-                <EmailCompose isModalShown={this.state.isModalShown} onToggleModal={this.onToggleModal}>
+                <EmailCompose isModalShown={this.state.isModalShown} onToggleModal={this.onToggleModal} deleteInputTxt={this.deleteInputTxt}>
                     <div className="modal-sender">
                         <span className="input-reference" >Cc:</span><input className="mail-input" name='sender' value={this.state.emailToAdd.sender} 
                             // placeholder='Example@gmail.com'
@@ -102,7 +143,7 @@ export class EmailApp extends React.Component {
                         />
                     </div>
                    
-                        <button onClick={this.addEmail}>Send</button>
+                        <button onClick={this.addEmail,this.onToggleModal}>Send</button>
                     
                 </EmailCompose>
             </div>

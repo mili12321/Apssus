@@ -1,6 +1,7 @@
 .header{
-    background-color: rgb(194, 194, 194);
+    background-color: rgb(48, 48, 48);
     padding: 20px;
+    color:rgb(194, 194, 194);
 }
 .header-continer{
     display: flex;
