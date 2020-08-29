@@ -51,7 +51,7 @@ export class EmailApp extends React.Component {
         console.log('email is removed',idx)
         emailService.remove(idx)
         this.loadEmails()
-        eventBus.emit('notify')
+        eventBus.emit('notify',{msg:"Email"})
     }
     setFilter = (filterBy) =>{
         console.log("ev.target.value",filterBy);
@@ -88,8 +88,11 @@ export class EmailApp extends React.Component {
     render() {
         const emails = this.getEmailForDisplay()
         return (
+            <React.Fragment> 
+            <EmailFilter onFilter={this.setFilter} setFilterIsRead={this.setFilterIsRead} setFilterIsUnRead={this.setFilterIsUnRead} />
+
             <div className="email-app-container">
-                <EmailFilter onFilter={this.setFilter} setFilterIsRead={this.setFilterIsRead} setFilterIsUnRead={this.setFilterIsUnRead} />
+              
                 <div className="email-options-container">
                     {/* <input name='sender' value={this.state.emailToAdd.sender} 
                         placeholder='sender name'
@@ -147,6 +150,7 @@ export class EmailApp extends React.Component {
                     
                 </EmailCompose>
             </div>
+            </React.Fragment>
 
 
         )

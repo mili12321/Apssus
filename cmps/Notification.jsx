@@ -1,15 +1,21 @@
 import eventBus from '../services/event-bus-service.js'
 export class Notification extends React.Component {
     state={
-        isShown:false
+        isShown:false,
+        msg: '',
+
     }
     componentDidMount() {
-        eventBus.on('notify', () => this.setState({isShown:true}))
+        eventBus.on('notify', (data) =>{
+            console.log(data)
+            this.setState({isShown:true,msg:data.msg})
+            setTimeout(()=>this.setState({isShown:false}), 2000)
+        })
     }
     render() {
         return (
-           <div>
-                {this.state.isShown && <h2>Notification</h2>}
+           <div className="notification-container">
+                {this.state.isShown && <h2>{this.state.msg} removed</h2>}
            </div>
         )
     }
