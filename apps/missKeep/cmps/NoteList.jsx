@@ -52,7 +52,9 @@ export class NoteList extends React.Component {
                             {note.list && note.list.map(todo =>
                                <div> <li className={todo.id} onClick={() => {
                                     { this.lineLi(todo.id) }
-                                }}>{todo.txt}<span className="fas fa-trash"></span></li></div>
+                                }}>{todo.txt}<span className="fas fa-trash" onClick={()=>{
+                                    this.props.onDeleteTodo(todo.id, note.id)
+                                } }></span></li></div>
                                )
                             }
                             

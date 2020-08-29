@@ -57,6 +57,10 @@ export class MissKeep extends React.Component {
         .then((notes) => this.setState({ notes }))
 
     }
+    deleteTodo=(noteId, todoId) => {
+        keepService.deleteTodo(noteId, todoId) 
+        this.updateNotes()
+    }
 
     render() {
         return (<div className="main-Container">
@@ -77,7 +81,7 @@ export class MissKeep extends React.Component {
                 <NoteTypeSelect onNewNoteImage={this.newNoteImage} onNewNoteYoutube={this.newNoteYoutube} onNewNoteAudio={this.newNoteAudio} />
             </section>
             <div className="grid-container">
-                <NoteList delete={this.DeleteNote} pin={this.PinNote} Notes={this.state.notes} onInlineInput={this.inlineInput} />
+                <NoteList onDeleteTodo={this.deleteTodo} delete={this.DeleteNote} pin={this.PinNote} Notes={this.state.notes} onInlineInput={this.inlineInput} />
             </div>
         </div>
         )
