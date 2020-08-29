@@ -1,5 +1,6 @@
 particlesJS.load('particles-js', 'particles.json');
 const { NavLink, withRouter } = ReactRouterDOM
+// import { Slideshow } from './cmps/Slideshow.jsx'
 export class Home extends React.Component {
 
     render() {
@@ -7,6 +8,9 @@ export class Home extends React.Component {
             
             <section className="z-index-container">
                 <h2>Home Sweet Home</h2>
+    
+                {/* <Slideshow /> */}
+
                 <div className="home-links-container">
                     <div className="home-link-div">
                         <NavLink className="home-link" to="/EmailApp">MisterEmail</NavLink>
