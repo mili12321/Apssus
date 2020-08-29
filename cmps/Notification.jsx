@@ -14,8 +14,8 @@ export class Notification extends React.Component {
     }
     render() {
         return (
-           <div className="notification-container">
-                {this.state.isShown && <h2>{this.state.msg} removed</h2>}
+           <div className='notification'>
+                {this.state.isShown && <h2  className="notification-container" >{this.state.msg} removed</h2>}
            </div>
         )
     }
