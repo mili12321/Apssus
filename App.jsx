@@ -5,15 +5,15 @@
 // import { MissKeep } from './apps/missKeep/MissKeep.jsx'
 const Router = ReactRouterDOM.HashRouter
 const { Route, Switch } = ReactRouterDOM
-import {Home} from './apps/home/Home.jsx'
-import {About} from './apps/about/About.jsx'
+import {Home} from 'apps/home/Home.jsx'
+import {About} from 'apps/about/About.jsx'
 import { EmailApp } from 'apps/misterEmail/EmailApp.jsx'
 import { EmailDetails } from 'apps/misterEmail/EmailDetails.jsx'
-import {MissKeep} from './apps/MissKeep/MissKeep.jsx'
+import {MissKeep} from 'apps/MissKeep/MissKeep.jsx'
 
 // import {MissBooks} from './apps/missBooks/MissBooks.jsx'
-import { NavBar } from './cmps/NavBar.jsx'
-import { Notification } from './cmps/Notification.jsx'
+import { NavBar } from 'cmps/NavBar.jsx'
+import { Notification } from 'cmps/Notification.jsx'
 
 // import {BookApp} from './apps/missBooks/pages/BookApp.jsx'
 // import {BookDetails} from './apps/missBooks/pages/BookDetails.jsx'
