@@ -1,3 +1,4 @@
+
 .note-mod {
     /* justify-content: end;
     align-items: baseline; */
@@ -138,6 +139,7 @@
     grid-template-columns: repeat(auto-fill,minmax(300px,auto));
     /* width: 100%; */
     gap: 10px 20px;
+    place-items: center;
 
 }
 
@@ -148,7 +150,7 @@
     margin: 0 5px;
 }
 .grid-container{
-    max-width: 1500px;
+    max-width: 1000px;
     width: 80vw;
     margin: auto;
 }
