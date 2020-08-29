@@ -30,8 +30,8 @@ export class App extends React.Component {
                                 <Route component={EmailDetails} path="/EmailApp/:emailId" />
                                 <Route component={EmailApp} path="/EmailApp" />
                                 <Route component={MissKeep} path="/MissKeep" />
-                                <Route component={MissBook} path="/MissBook" />
-                                <Route component={BookDetails} path="/BookDetails" />
+                                <Route component={MissBook} path="/book" />
+                                <Route component={BookDetails} path="/book/:bookId" />
                                 {/* <Route component={MissBooks} path="/MissBooks" /> */}
                                 <Route component={ About } path="/about" />
                                 <Route exact component={ Home } path="/" />

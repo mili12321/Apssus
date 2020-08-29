@@ -27,3 +27,11 @@ body {
     text-align: center;
     /* background-color: rgb(207, 207, 207); */
 }
+
+.navbar-link {
+    text-decoration: none;
+    color: black;
+    font-family: 'Times New Roman', Times, serif;
+    letter-spacing: 0.5px;
+    margin-top: 10px;
+}
