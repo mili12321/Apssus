@@ -7,6 +7,9 @@ body {
     padding: 0;
     margin: 0;
     overflow-x: hidden;
+    /* font-family: 'Balsamiq Sans', cursive; */
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 16px;
 }
 
 .main-Contaoner{
@@ -16,8 +19,13 @@ body {
     flex-direction: column;
     justify-content: space-between;
 }
-
+.notification{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
 .notification-container{
+    align-self: center;
     width: 50vw;
     height: 10vw;
     position: absolute;
@@ -25,13 +33,16 @@ body {
     left: 50%;
     transform: translate(-50%,-50%);
     text-align: center;
-    /* background-color: rgb(207, 207, 207); */
+    background-color: rgba(193, 117, 255, 0.548);
+    border-radius: 20px;
+    line-height: 10vw;
+    
 }
 
 .navbar-link {
     text-decoration: none;
-    color: black;
-    font-family: 'Times New Roman', Times, serif;
+    color:rgb(41, 0, 65);
+    font-family: 'Times New Roman';
     letter-spacing: 0.5px;
-    margin-top: 10px;
+    margin: 10px;
 }

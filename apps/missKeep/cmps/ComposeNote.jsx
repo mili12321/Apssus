@@ -2,7 +2,7 @@ export class ComposeNote extends React.Component {
 
     render() {
         return (<section>
-            Add Note: <input className="add-input" type="text" onChange={(ev) => {
+            <span className="input-text">Add Note: </span><input className="add-input" type="text" onChange={(ev) => {
                 this.props.onWriteNote(ev.target.value)
             }} />
         </section>

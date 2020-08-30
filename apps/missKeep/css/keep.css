@@ -1,4 +1,7 @@
-
+.input-text {
+    color: blanchedalmond;
+    font-size: x-large;
+}
 .note-mod {
     /* justify-content: end;
     align-items: baseline; */
@@ -102,6 +105,8 @@
     border:none;
     background-image: linear-gradient(rgb(208, 89, 255), rgb(233, 124, 255),rgb(185, 110, 255));
     border-radius: 5px;
+    margin-top: 6.5px;
+    height: 35px;
     color: white;
     cursor: pointer;
 }
@@ -148,6 +153,17 @@
 }
 .add-input, .search-input{
     margin: 0 5px;
+    width: 300px;
+    padding: 10px;
+    border-radius: 7px;
+    background-color: rgb(239, 216, 252);
+    text-align: center;
+    position: relative;
+    z-index: 19;
+    align-self: center;
+    cursor: pointer;
+    height: 10px;
+    
 }
 .grid-container{
     max-width: 1000px;
@@ -161,6 +177,10 @@
     text-align: center;
     align-items: center;
     flex-direction: column;
+}
+
+.fa-trash {
+    color: black;
 }
 
 .row {

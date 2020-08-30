@@ -11,8 +11,25 @@ export class EmailApp extends React.Component {
         emails: [],
         isModalShown: false,
         filterBy: '',
-        all:false
+        showMailbyClick: '',
+        openEmail: '',
+        displayed: ""
+       
     }
+    onReadMail = (id) =>{
+        console.log('read')
+        this.setState({showMailbyClick:'showMail'})
+        this.setState({openEmail:'gray'})
+        emailService.changeToRead(id)
+        this.loadEmails();
+      }
+      onUnreadMail = (id) => {
+        console.log('unread')
+        this.setState({showMailbyClick:''})
+        this.setState({openEmail:''})
+        emailService.changeToUnRead(id)
+        this.loadEmails();
+      }
     onCountUnreadMails = () =>{
         const count = emailService.CountUnreadMails()
         return count
@@ -21,6 +38,7 @@ export class EmailApp extends React.Component {
         this.loadEmails();
         this.onCountUnreadMails()
         this.setState({all: false});
+        emailService.getUnreadCount()
     }
     loadEmails() {
         emailService.query()
@@ -33,6 +51,7 @@ export class EmailApp extends React.Component {
         emailService.add(this.state.emailToAdd)
         this.setState({emailToAdd:emailService.getEmpty()})
         this.loadEmails();
+        this.onToggleModal()
     }
     deleteInputTxt = () =>{
         this.setState({emailToAdd:emailService.getEmpty()})
@@ -47,16 +66,15 @@ export class EmailApp extends React.Component {
         this.setState({isModalShown:!this.state.isModalShown})
     }
     
-    onRemoveEmail = (idx) =>{
-        console.log('email is removed',idx)
-        emailService.remove(idx)
+    onRemoveEmail = (id) =>{
+        console.log('email is removed',id)
+        emailService.remove(id)
         this.loadEmails()
         eventBus.emit('notify',{msg:"Email"})
     }
     setFilter = (filterBy) =>{
         console.log("ev.target.value",filterBy);
         this.setState({filterBy})
-       
     }
     setFilterIsRead = () => {
         this.setState({filterBy: true})
@@ -65,52 +83,50 @@ export class EmailApp extends React.Component {
         this.setState({filterBy: false})
     }
     unSetFilter = () =>{
-        this.setState({all: true})
+        this.setState({filterBy: ''})
     }
     getEmailForDisplay(){
-        if(this.state.all){
-            this.setState({all: false});
-            const emails = this.state.emails 
-            return emails;
-        }
-        
-            const emails = this.state.emails.filter(email =>
-                email.sender.includes(this.state.filterBy) ||
-                email.subject.includes(this.state.filterBy) ||
-                email.body.includes(this.state.filterBy)||
-                email.body.includes(this.state.filterBy)||
-                email.isRead===this.state.filterBy
-            )
-            return emails;
+        const emails = this.state.emails.filter(email =>
+            email.sender.includes(this.state.filterBy) ||
+            email.subject.includes(this.state.filterBy) ||
+            email.body.includes(this.state.filterBy)||
+            email.body.includes(this.state.filterBy)||
+            email.isRead===this.state.filterBy
+        )
+        return emails;
         
         
+    }
+    toggleMenu = ()=> {
+        // document.querySelector('.mobile-menu').classList.toggle('displayed');
+        this.setState({displayed:'displayed'})
     }
     render() {
         const emails = this.getEmailForDisplay()
+        
         return (
             <React.Fragment> 
+               {/* <h1>{ emailService.getUnreadCount()}</h1> */}
             <EmailFilter onFilter={this.setFilter} setFilterIsRead={this.setFilterIsRead} setFilterIsUnRead={this.setFilterIsUnRead} />
 
             <div className="email-app-container">
               
+            {/* <div className="hamburger-button" onClick={this.toggleMenu}>
+                    <i className="fa fa-bars"></i>
+                </div>
+                <div class={`mobile-menu slide-in-top ${this.state.displayed}`}>
+                    <a className="mobile-nav-link" href="#"><i className="fas fa-plus"></i><span className='compose'>Compose</span></a>
+                    <a className="mobile-nav-link" href="#"><i className="fas fa-inbox"></i><span className="Inbox">Inbox</span><span>{ emailService.getUnreadCount()}</span></a>
+                    <a className="mobile-nav-link" href="#"><i className="fas fa-star"></i><span>Starred</span></a>
+                    <a className="mobile-nav-link" href="#"><i className="fas fa-share-square"></i><span>Sent mail</span></a>
+                    <a className="mobile-nav-link" href="#"><i className="fab fa-firstdraft"></i><span>Drafs</span></a>
+                </div> */}
+
                 <div className="email-options-container">
-                    {/* <input name='sender' value={this.state.emailToAdd.sender} 
-                        placeholder='sender name'
-                        type="text" onChange={this.onInputChange}
-                    />
-                    <input name='subject' value={this.state.emailToAdd.subject}
-                        placeholder='subject' 
-                        type="text" onChange={this.onInputChange}
-                    />
-                    <input name="body" value={this.state.emailToAdd.body}
-                        placeholder='body' 
-                        type="text" onChange={this.onInputChange}
-                    />
-                    <button onClick={this.addEmail}>add</button> */}
 
                     <div className="email-option new-mail" onClick={this.onToggleModal}><i className="fas fa-plus"></i><span className='compose'>Compose</span></div>
                    <div className="option-continer inbox-continer">
-                <div className="email-option inbox" onClick={this.unSetFilter}><i className="fas fa-inbox"></i><span>Inbox</span><span>{this.onCountUnreadMails()}</span></div>
+                <div className="email-option inbox" onClick={this.unSetFilter}><i className="fas fa-inbox"></i><span className="Inbox">Inbox</span><span>{ emailService.getUnreadCount()}</span></div>
                    </div>
                     <div className="option-continer">
                         <div className="email-option starred"><i className="fas fa-star"></i><span>Starred</span></div>
@@ -122,7 +138,7 @@ export class EmailApp extends React.Component {
                         <div className="email-option drafs"><i className="fab fa-firstdraft"></i><span>Drafs</span></div>
                    </div>
                 </div>
-                <EmailList emails={ emails } onRemoveEmail={this.onRemoveEmail} />
+                <EmailList emails={ emails } onRemoveEmail={this.onRemoveEmail} onReadMail={this.onReadMail} onUnreadMail={this.onUnreadMail} />
                 {/* /*to show all the email =  this.state.emails to show only the email from the filter, eamil to deisplay = emails */}
 
 
@@ -146,7 +162,7 @@ export class EmailApp extends React.Component {
                         />
                     </div>
                    
-                        <button onClick={this.addEmail,this.onToggleModal}>Send</button>
+                        <button onClick={this.addEmail}>Send</button>
                     
                 </EmailCompose>
             </div>

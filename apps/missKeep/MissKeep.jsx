@@ -33,7 +33,6 @@ export class MissKeep extends React.Component {
 
         keepService.deleteNote(noteId)
         this.updateNotes()
-        debugger;
         eventBus.emit('notify',{msg:"Note"})
     }
     PinNote = (noteId) => {
@@ -70,7 +69,7 @@ export class MissKeep extends React.Component {
         return (<div className="main-Container">
             <section>
                 <div className="ComposeNote-container">
-                    Search Note:<input className="search-input" type="search" onChange={(ev) => {
+                    <span className="input-text">Search Note:</span><input className="search-input" type="search" onChange={(ev) => {
                             this.onSearchNotes(ev.target.value)
                             // ev.target.value = ''
                         }
