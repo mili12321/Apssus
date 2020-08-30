@@ -2,6 +2,7 @@ import { ComposeNote } from './cmps/ComposeNote.jsx'
 import { NoteList } from './cmps/NoteList.jsx'
 import { NoteTypeSelect } from './cmps/NoteTypeSelect.jsx'
 import { keepService } from './services/keep-service.js'
+import eventBus from '../../services/event-bus-service.js'
 
 export class MissKeep extends React.Component {
     state = {
@@ -29,8 +30,11 @@ export class MissKeep extends React.Component {
     }
 
     DeleteNote = (noteId) => {
+
         keepService.deleteNote(noteId)
         this.updateNotes()
+        debugger;
+        eventBus.emit('notify',{msg:"Note"})
     }
     PinNote = (noteId) => {
         keepService.PinNote(noteId)
