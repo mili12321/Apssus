@@ -12,7 +12,8 @@ export class EmailApp extends React.Component {
         isModalShown: false,
         filterBy: '',
         showMailbyClick: '',
-        openEmail: ''
+        openEmail: '',
+        displayed: ""
        
     }
     onReadMail = (id) =>{
@@ -96,6 +97,10 @@ export class EmailApp extends React.Component {
         
         
     }
+    toggleMenu = ()=> {
+        // document.querySelector('.mobile-menu').classList.toggle('displayed');
+        this.setState({displayed:'displayed'})
+    }
     render() {
         const emails = this.getEmailForDisplay()
         
@@ -106,20 +111,18 @@ export class EmailApp extends React.Component {
 
             <div className="email-app-container">
               
+            {/* <div className="hamburger-button" onClick={this.toggleMenu}>
+                    <i className="fa fa-bars"></i>
+                </div>
+                <div class={`mobile-menu slide-in-top ${this.state.displayed}`}>
+                    <a className="mobile-nav-link" href="#"><i className="fas fa-plus"></i><span className='compose'>Compose</span></a>
+                    <a className="mobile-nav-link" href="#"><i className="fas fa-inbox"></i><span className="Inbox">Inbox</span><span>{ emailService.getUnreadCount()}</span></a>
+                    <a className="mobile-nav-link" href="#"><i className="fas fa-star"></i><span>Starred</span></a>
+                    <a className="mobile-nav-link" href="#"><i className="fas fa-share-square"></i><span>Sent mail</span></a>
+                    <a className="mobile-nav-link" href="#"><i className="fab fa-firstdraft"></i><span>Drafs</span></a>
+                </div> */}
+
                 <div className="email-options-container">
-                    {/* <input name='sender' value={this.state.emailToAdd.sender} 
-                        placeholder='sender name'
-                        type="text" onChange={this.onInputChange}
-                    />
-                    <input name='subject' value={this.state.emailToAdd.subject}
-                        placeholder='subject' 
-                        type="text" onChange={this.onInputChange}
-                    />
-                    <input name="body" value={this.state.emailToAdd.body}
-                        placeholder='body' 
-                        type="text" onChange={this.onInputChange}
-                    />
-                    <button onClick={this.addEmail}>add</button> */}
 
                     <div className="email-option new-mail" onClick={this.onToggleModal}><i className="fas fa-plus"></i><span className='compose'>Compose</span></div>
                    <div className="option-continer inbox-continer">

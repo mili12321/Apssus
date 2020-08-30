@@ -14,17 +14,47 @@ export const emailService = {
 const KEY = 'emails'
 
 var emails = [
-    { id: 'm101', sender: 'mili', subject: 'Wassap?', body: 'Pick up!', isRead: false, opend:0, sentAt : 1551133930594},
-    { id: 'm102', sender: 'mili', subject: 'Wassap?', body: 'Pick up!', isRead: false, opend:0, sentAt : 1551133930594},
-    { id: 'm103', sender: 'mili', subject: 'Wassap?', body: 'Pick up!', isRead: false, opend:0, sentAt : 1551133930594},
-    { id: 'm104', sender: 'mili', subject: 'Wassap?', body: 'Pick up!', isRead: false, opend:0, sentAt : 1551133930594},
-    { id: 'm105', sender: 'mili', subject: 'Wassap?', body: 'Pick up!', isRead: false, opend:0, sentAt : 1551133930594},
-    { id: 'm106', sender: 'mili', subject: 'Wassap?', body: 'Pick up!', isRead: false, opend:0, sentAt : 1551133930594},
-    { id: 'm107', sender: 'mili', subject: 'Wassap?', body: 'Pick up!', isRead: false, opend:0, sentAt : 1551133930594},
-    { id: 'm108', sender: 'mili', subject: 'Wassap?', body: 'Pick up!', isRead: false, opend:0, sentAt : 1551133930594},
-    { id: 'm109', sender: 'mili', subject: 'Wassap?', body: 'Pick up!', isRead: false, opend:0, sentAt : 1551133930594},
-    { id: 'm1010', sender: 'mili', subject: 'Wassap?', body: 'Pick up!', isRead: false, opend:0, sentAt : 1551133930594},
-    { id: 'm1011', sender: 'mili', subject: 'Wassap?', body: 'Pick up!', isRead: false, opend:0, sentAt : 1551133930594}
+    { id: 'm101', 
+    sender: 'Bali Body‏ ', 
+    subject: 'FREE SHIPPING TODAY 🙌🏽', 
+    body: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Odio sequi doloremque quas odit nisi alias impedit fugiat inventore vero iure, recusandae atque similique autem modi facilis quia. Placeat quidem incidunt nisi. Velit eveniet deleniti accusamus ut dolorem dicta porro est.',  
+    isRead: false, 
+    opend:0, 
+    sentAt : 'Aug 29'},
+    { id: 'm102', 
+    sender: 'BlendJet', 
+    subject: 'Easy workout smoothies 💪', 
+    body: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Odio sequi doloremque quas odit nisi alias impedit fugiat inventore vero iure, recusandae atque similique autem modi facilis quia. Placeat quidem incidunt nisi. Velit eveniet deleniti accusamus ut dolorem dicta porro est.',  
+    isRead: false, 
+    opend:0, 
+    sentAt : 'Aug 29'},
+    { id: 'm103',
+    sender: 'Laura Mercier',
+    subject: 'Don\'t Miss Out On These Limited Edition Sets - Exclusively At Nordstrom‏', 
+    body: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Odio sequi doloremque quas odit nisi alias impedit fugiat inventore vero iure, recusandae atque similique autem modi facilis quia. Placeat quidem incidunt nisi. Velit eveniet deleniti accusamus ut dolorem dicta porro est.', 
+    isRead: false, 
+    opend:0, 
+    sentAt : 'Aug 29'},
+    { id: 'm104', 
+    sender: 'Rebellious Fashion', 
+    subject: 'Order now, get it tomorrow + save extra 15% 👉‏', 
+    body: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Odio sequi doloremque quas odit nisi alias impedit fugiat inventore vero iure, recusandae atque similique autem modi facilis quia. Placeat quidem incidunt nisi. Velit eveniet deleniti accusamus ut dolorem dicta porro est.', 
+    isRead: false, 
+    opend:0, 
+    sentAt : 'Aug 29'},
+    { id: 'm105', 
+    sender: 'LinkedIn Job Alerts', 
+    subject: 'New Jobs in Tel Aviv‏ ', 
+    body:'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Odio sequi doloremque quas odit nisi alias impedit fugiat inventore vero iure, recusandae atque similique autem modi facilis quia. Placeat quidem incidunt nisi. Velit eveniet deleniti accusamus ut dolorem dicta porro est.', 
+    isRead: false, 
+    opend:0, 
+    sentAt : 'Aug 28'},
+    { id: 'm106', sender: 'mili', subject: 'Wassap?', body: 'Pick up!', isRead: false, opend:0, sentAt : 'Aug 28'},
+    { id: 'm107', sender: 'mili', subject: 'Wassap?', body: 'Pick up!', isRead: false, opend:0, sentAt : 'Aug 28'},
+    { id: 'm108', sender: 'mili', subject: 'Wassap?', body: 'Pick up!', isRead: false, opend:0, sentAt : 'Aug 27'},
+    { id: 'm109', sender: 'mili', subject: 'Wassap?', body: 'Pick up!', isRead: false, opend:0, sentAt : 'Aug 27'},
+    { id: 'm1010', sender: 'mili', subject: 'Wassap?', body: 'Pick up!', isRead: false, opend:0, sentAt : 'Aug 26'},
+    { id: 'm1011', sender: 'mili', subject: 'Wassap?', body: 'Pick up!', isRead: false, opend:0, sentAt : 'Aug 25'}
    
 ]
 let gEmails;
@@ -80,8 +110,8 @@ function add(email){
 
     const emailToAdd = {
         id:makeId(),
-        // isRead:false,
-        // sentAt:Date.now(),
+        isRead:false,
+        sentAt:new Date().toLocaleTimeString(),
         ...email
     }
     gEmails=[emailToAdd, ...gEmails]

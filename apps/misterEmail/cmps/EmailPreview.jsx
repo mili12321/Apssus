@@ -9,7 +9,8 @@ export class EmailPreview extends React.Component {
       // fontWeight: 'bold',
       showMailbyClick: '',
       openEmail: '',
-      isOpen: false
+      isOpen: false,
+      star:"far"
   }
 
 
@@ -63,13 +64,17 @@ export class EmailPreview extends React.Component {
   toggleOpenMail = () =>{
 
   }
+
+  changeStar = () => {
+    this.setState({star:"fas"})
+  }
   
   render() {
   
       return (
       <React.Fragment>
         <tr className={`email-preview ${this.state.openEmail}`} onClick={()=>{this.onToggleEmailPreview(this.props.email.id)}}>
-          <td className="email-icons">icons</td>
+          <td className="email-icons" onClick={this.changeStar}><i class={`${this.state.star} fa-star`}></i></td>
           <td className={`email-sender ${this.props.email.isRead?"":"font-bold"}`}>{this.props.email.sender}</td>
           <td className={`email-subject ${this.props.email.isRead?"":"font-bold"}`}>
               { this.props.email.subject }
